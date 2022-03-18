@@ -11,7 +11,7 @@
  Target Server Version : 50728
  File Encoding         : 65001
 
- Date: 18/03/2022 21:28:04
+ Date: 18/03/2022 21:34:04
 */
 
 SET NAMES utf8mb4;
@@ -138,8 +138,8 @@ CREATE TABLE `em_employee`  (
   `employee_number` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '员工编号',
   `department_id` int(11) NULL DEFAULT NULL COMMENT '所属部门id',
   `management_scope` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '管理范围',
-  `post` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '岗位',
-  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '类型',
+  `post` enum('ordinary_staff','manager','executive_director','minister','group_leader','chief_inspector','management_layer','senior_management','general_manager') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '岗位(ordinary_staff:普通员工,manager:经理,executive_director:主管,minister:部长,group_leader:组长,chief_inspector:总监,management_layer:管理层,senior_management:高级管理层,general_manager:总经理)',
+  `type` enum('full_time','internship','part_time_job','outsource','dispatch') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '类型(full_time:全职,internship:实习,part_time_job:兼职,outsource:外包,dispatch:派遣)',
   `regular_time` datetime NULL DEFAULT NULL COMMENT '转正时间',
   `comment` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '备注',
   `create_time` datetime NOT NULL COMMENT '创建时间',
