@@ -11,7 +11,7 @@
  Target Server Version : 50728
  File Encoding         : 65001
 
- Date: 18/03/2022 20:14:47
+ Date: 18/03/2022 20:57:40
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,7 @@ CREATE TABLE `em_attachment`  (
   `create_by` datetime NULL DEFAULT NULL COMMENT '创建者',
   `update_by` datetime NULL DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '附件表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for em_corporate_information
@@ -62,7 +62,7 @@ CREATE TABLE `em_corporate_information`  (
   `create_by` int(11) NULL DEFAULT NULL COMMENT '创建者',
   `update_by` int(11) NULL DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '企业信息管理' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for em_corporate_user_account
@@ -82,7 +82,7 @@ CREATE TABLE `em_corporate_user_account`  (
   `create_by` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '创建者',
   `update_by` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '更新者',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '企业用户账号管理' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for em_department
@@ -99,7 +99,7 @@ CREATE TABLE `em_department`  (
   `create_by` datetime NULL DEFAULT NULL COMMENT '创建者',
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '部门表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for em_employee
@@ -128,7 +128,7 @@ CREATE TABLE `em_employee`  (
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '员工表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for em_person_user_account
@@ -147,7 +147,7 @@ CREATE TABLE `em_person_user_account`  (
   `create_by` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '创建者',
   `update_by` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '更新者',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '个人用户账号' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for em_product_orders
@@ -173,7 +173,7 @@ CREATE TABLE `em_product_orders`  (
   `create_by` datetime NULL DEFAULT NULL COMMENT '创建者',
   `update_by` datetime NULL DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '产品订单' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for em_product_review
@@ -190,6 +190,6 @@ CREATE TABLE `em_product_review`  (
   `create_by` datetime NULL DEFAULT NULL COMMENT '创建者',
   `update_by` datetime NULL DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '产品提交审核' ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
