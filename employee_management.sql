@@ -11,7 +11,7 @@
  Target Server Version : 50728
  File Encoding         : 65001
 
- Date: 18/03/2022 21:04:11
+ Date: 18/03/2022 21:16:17
 */
 
 SET NAMES utf8mb4;
@@ -27,8 +27,8 @@ CREATE TABLE `em_attachment`  (
   `comment` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '备注',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `create_by` datetime NULL DEFAULT NULL COMMENT '创建者',
-  `update_by` datetime NULL DEFAULT NULL COMMENT '更新者',
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '附件表' ROW_FORMAT = Dynamic;
 
@@ -63,15 +63,17 @@ CREATE TABLE `em_corporate_information`  (
   `contact_person_identity_card_img_rear` int(11) NULL DEFAULT NULL COMMENT '企业联系人身份证号，反面（人像），图片',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `create_by` int(11) NULL DEFAULT NULL COMMENT '创建者',
-  `update_by` int(11) NULL DEFAULT NULL COMMENT '更新者',
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '企业信息管理' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '企业信息管理' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of em_corporate_information
 -- ----------------------------
-INSERT INTO `em_corporate_information` VALUES (1, 'XXX信息科技有限公司', '张三', 'JH-20210001', 'enable', 'verified', '2021-09-10 00:00:00', '2099-12-31 23:59:59', NULL, '电子信息', '边姝妍', '13659630009', '企业简介是介绍公司什么时间成立、住所地、规模、经营范围、法定代表 人、有何特点等等。所谓简介，也就是让他人通过您写的简介能了解你们公司的 一些基本情况，或者您想要重点介绍你们公司的哪一方面的情况。', '913101175821220588', NULL, '632323190605266240', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `em_corporate_information` VALUES (1, 'XXX信息科技有限公司', '仰夏槐', 'JH-20210001', 'enable', 'verified', '2021-09-10 00:00:00', '2099-12-31 23:59:59', '', '电子信息', '边姝妍', '13659630009', '企业简介是介绍公司什么时间成立、住所地、规模、经营范围、法定代表 人、有何特点等等。所谓简介，也就是让他人通过您写的简介能了解你们公司的 一些基本情况，或者您想要重点介绍你们公司的哪一方面的情况。', '913101175821220588', NULL, '632323190605266240', NULL, NULL, NULL, NULL, '2022-03-18 21:07:06', '2022-03-18 21:07:08', 'admin', 'admin');
+INSERT INTO `em_corporate_information` VALUES (2, 'XXX信息科技有限公司', '梁幼丝', 'JH-20210002', 'pause', 'not_approved', '2021-09-10 00:00:00', '2099-12-31 23:59:59', '', '电子信息', '劳灵阳', '13659630031', '企业简介是介绍公司什么时间成立、住所地、规模、经营范围、法定代表 人、有何特点等等。所谓简介，也就是让他人通过您写的简介能了解你们公司的 一些基本情况，或者您想要重点介绍你们公司的哪一方面的情况。', '913101175821220588', NULL, '632323190605266240', NULL, NULL, NULL, NULL, '2022-03-18 21:07:06', '2022-03-18 21:07:08', 'admin', 'admin');
+INSERT INTO `em_corporate_information` VALUES (3, 'XXX信息科技有限公司', '伊格格', 'JH-20210002', 'sign_out', 'pending_reward', '2021-09-10 00:00:00', '2099-12-31 23:59:59', '', '电子信息', '邹梓莹', '13659630040', '企业简介是介绍公司什么时间成立、住所地、规模、经营范围、法定代表 人、有何特点等等。所谓简介，也就是让他人通过您写的简介能了解你们公司的 一些基本情况，或者您想要重点介绍你们公司的哪一方面的情况。', '913101175821220588', NULL, '632323190605266240', NULL, NULL, NULL, NULL, '2022-03-18 21:07:06', '2022-03-18 21:07:08', 'admin', 'admin');
 
 -- ----------------------------
 -- Table structure for em_corporate_user_account
@@ -88,8 +90,8 @@ CREATE TABLE `em_corporate_user_account`  (
   `type` enum('admin','user') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'user' COMMENT '类型(admin:企业管理员,user:企业用户)',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `create_by` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '创建者',
-  `update_by` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '更新者',
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '企业用户账号管理' ROW_FORMAT = Dynamic;
 
@@ -109,7 +111,7 @@ CREATE TABLE `em_department`  (
   `comment` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '备注',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `create_by` datetime NULL DEFAULT NULL COMMENT '创建者',
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '部门表' ROW_FORMAT = Dynamic;
@@ -165,8 +167,8 @@ CREATE TABLE `em_person_user_account`  (
   `type` enum('user') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'user' COMMENT '类型(user:个人用户)',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `create_by` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '创建者',
-  `update_by` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '更新者',
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '个人用户账号' ROW_FORMAT = Dynamic;
 
@@ -195,8 +197,8 @@ CREATE TABLE `em_product_orders`  (
   `invoice_status` enum('unbilled','invoiced') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'unbilled' COMMENT '发票状态',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `create_by` datetime NULL DEFAULT NULL COMMENT '创建者',
-  `update_by` datetime NULL DEFAULT NULL COMMENT '更新者',
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '产品订单' ROW_FORMAT = Dynamic;
 
@@ -216,8 +218,8 @@ CREATE TABLE `em_product_review`  (
   `manifest_file` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '证明文件，可能有N个（用|分开）',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `create_by` datetime NULL DEFAULT NULL COMMENT '创建者',
-  `update_by` datetime NULL DEFAULT NULL COMMENT '更新者',
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '产品提交审核' ROW_FORMAT = Dynamic;
 
