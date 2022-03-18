@@ -11,7 +11,7 @@
  Target Server Version : 50728
  File Encoding         : 65001
 
- Date: 18/03/2022 20:57:40
+ Date: 18/03/2022 21:04:11
 */
 
 SET NAMES utf8mb4;
@@ -33,6 +33,10 @@ CREATE TABLE `em_attachment`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '附件表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of em_attachment
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for em_corporate_information
 -- ----------------------------
 DROP TABLE IF EXISTS `em_corporate_information`;
@@ -51,18 +55,23 @@ CREATE TABLE `em_corporate_information`  (
   `contact_phone` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '企业联系人电话',
   `summary` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '企业简介',
   `certificate_for_uniform_social_credit_code` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '统一社会信用代码',
-  `business_license` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '企业工商营业执照（三证合一），图片',
+  `business_license` int(11) NULL DEFAULT NULL COMMENT '企业工商营业执照（三证合一），图片',
   `legal_entity_identity_card` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '企业法人身份证号',
-  `legal_entity_identity_card_img_positive` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '企业法人身份证，正面（国徽），图片',
-  `legal_entity_identity_card_img_rear` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '企业法人身份证，反面（人像），图片',
-  `contact_person_identity_card_img_positive` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '企业联系人身份证号，正面（国徽），图片',
-  `contact_person_identity_card_img_rear` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '企业联系人身份证号，反面（人像），图片',
-  `create_time` int(11) NULL DEFAULT NULL COMMENT '创建时间',
-  `update_time` int(11) NULL DEFAULT NULL COMMENT '更新时间',
+  `legal_entity_identity_card_img_positive` int(11) NULL DEFAULT NULL COMMENT '企业法人身份证，正面（国徽），图片',
+  `legal_entity_identity_card_img_rear` int(11) NULL DEFAULT NULL COMMENT '企业法人身份证，反面（人像），图片',
+  `contact_person_identity_card_img_positive` int(11) NULL DEFAULT NULL COMMENT '企业联系人身份证号，正面（国徽），图片',
+  `contact_person_identity_card_img_rear` int(11) NULL DEFAULT NULL COMMENT '企业联系人身份证号，反面（人像），图片',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `create_by` int(11) NULL DEFAULT NULL COMMENT '创建者',
   `update_by` int(11) NULL DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '企业信息管理' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '企业信息管理' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of em_corporate_information
+-- ----------------------------
+INSERT INTO `em_corporate_information` VALUES (1, 'XXX信息科技有限公司', '张三', 'JH-20210001', 'enable', 'verified', '2021-09-10 00:00:00', '2099-12-31 23:59:59', NULL, '电子信息', '边姝妍', '13659630009', '企业简介是介绍公司什么时间成立、住所地、规模、经营范围、法定代表 人、有何特点等等。所谓简介，也就是让他人通过您写的简介能了解你们公司的 一些基本情况，或者您想要重点介绍你们公司的哪一方面的情况。', '913101175821220588', NULL, '632323190605266240', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for em_corporate_user_account
@@ -85,6 +94,10 @@ CREATE TABLE `em_corporate_user_account`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '企业用户账号管理' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of em_corporate_user_account
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for em_department
 -- ----------------------------
 DROP TABLE IF EXISTS `em_department`;
@@ -100,6 +113,10 @@ CREATE TABLE `em_department`  (
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '部门表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of em_department
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for em_employee
@@ -131,6 +148,10 @@ CREATE TABLE `em_employee`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '员工表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of em_employee
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for em_person_user_account
 -- ----------------------------
 DROP TABLE IF EXISTS `em_person_user_account`;
@@ -148,6 +169,10 @@ CREATE TABLE `em_person_user_account`  (
   `update_by` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '更新者',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '个人用户账号' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of em_person_user_account
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for em_product_orders
@@ -176,6 +201,10 @@ CREATE TABLE `em_product_orders`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '产品订单' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of em_product_orders
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for em_product_review
 -- ----------------------------
 DROP TABLE IF EXISTS `em_product_review`;
@@ -191,5 +220,9 @@ CREATE TABLE `em_product_review`  (
   `update_by` datetime NULL DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '产品提交审核' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of em_product_review
+-- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;
