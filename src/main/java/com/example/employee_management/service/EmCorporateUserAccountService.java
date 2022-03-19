@@ -9,5 +9,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  */
 public interface EmCorporateUserAccountService{
+    String getStatus(int id);
 
+    boolean changeStatus(int id,String state);
+
+    boolean deleteAccount(int id);
 }
