@@ -69,7 +69,9 @@ public class EmCorporateUserAccountController {
     public Result findByKeyword(@RequestParam(name = "currentPage",defaultValue = "1") Integer currentPage,
                                 @RequestParam(name = "keyword") String keyword ){
         IPage userAccount = service.getUserAccount(currentPage,keyword);
-        System.out.println(userAccount.getTotal());
+        if(userAccount.getTotal()==0){
+            Result.fail("查询不到数据");
+        }
         return Result.success(userAccount);
     }
 }
