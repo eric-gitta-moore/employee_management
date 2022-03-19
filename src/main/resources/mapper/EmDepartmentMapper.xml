@@ -2,4 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.employee_management.mapper.EmDepartmentMapper">
 
+    <select id="selectDepartment" resultType="com.example.employee_management.entity.EmDepartment">
+        select * from em_department where corporate_id=#{corporateId}
+    </select>
 </mapper>
