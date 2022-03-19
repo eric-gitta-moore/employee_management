@@ -1,4 +1,4 @@
-package com.example.employee_management.utils;
+package com.example.employee_management.common.utils;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.web.multipart.MultipartFile;

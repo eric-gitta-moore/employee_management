@@ -1,4 +1,4 @@
-package com.example.employee_management.common;
+package com.example.employee_management.common.utils;
 
 import lombok.Data;
 

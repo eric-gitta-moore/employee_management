@@ -1,6 +1,6 @@
 package com.example.employee_management.exception;
 
-import com.example.employee_management.common.Result;
+import com.example.employee_management.common.utils.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
