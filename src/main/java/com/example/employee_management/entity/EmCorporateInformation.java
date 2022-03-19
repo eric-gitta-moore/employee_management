@@ -111,6 +111,11 @@ public class EmCorporateInformation implements Serializable {
     private Integer legalEntityIdentityCardImgRear;
 
     /**
+    * 企业联系人身份证号
+    */
+    private Integer contactPersonIdentityCard;
+
+    /**
      * 企业联系人身份证号，正面（国徽），图片
      */
     private Integer contactPersonIdentityCardImgPositive;
