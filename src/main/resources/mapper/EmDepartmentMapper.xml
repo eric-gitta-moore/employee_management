@@ -3,6 +3,35 @@
 <mapper namespace="com.example.employee_management.mapper.EmDepartmentMapper">
 
     <select id="selectDepartment" resultType="com.example.employee_management.entity.EmDepartment">
-        select * from em_department where corporate_id=#{corporateId}
+        select *
+        from em_department
+        where corporate_id = #{corporateId}
     </select>
+
+    <insert id="insert" parameterType="com.example.employee_management.entity.EmDepartment">
+        INSERT INTO `em_department` (`id`, `department_name`, `corporate_id`, `superior_department`, `owner`, `comment`,
+                                     `create_time`, `update_time`, `create_by`, `update_by`)
+        VALUES (null,
+                #{departmentName},
+                #{corporateId},
+                #{superiorDepartment},
+                #{owner},
+                #{comment},
+                now(),
+                now(),
+                "admin",
+                "admin");
+
+    </insert>
+
+    <update id="updateById" parameterType="com.example.employee_management.entity.EmDepartment">
+        UPDATE `em_department`
+        SET `department_name`     = #{departmentName},
+            `superior_department` = #{superiorDepartment},
+            `owner`               = #{owner},
+            `comment`             = #{comment},
+            `update_time`         = now(),
+            `update_by`           = "admin"
+        WHERE id = #{id}
+    </update>
 </mapper>

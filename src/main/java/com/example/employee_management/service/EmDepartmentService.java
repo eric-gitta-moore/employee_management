@@ -2,6 +2,7 @@ package com.example.employee_management.service;
 
 import com.example.employee_management.entity.EmDepartment;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.employee_management.entity.EmEmployee;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,12 +31,9 @@ public interface EmDepartmentService{
      */
     List<EmDepartment> buildDeptTree(List<EmDepartment> depts);
 
-//    /**
-//     * 构建前端所需要下拉树结构
-//     *
-//     * @param depts 部门列表
-//     * @return 下拉树结构列表
-//     */
-//    List<TreeSelect> buildDeptTreeSelect(List<EmDepartment> depts);
+    Integer addDepartment(EmDepartment department);
+
+    Integer editDepartment(EmDepartment department);
+
 
 }

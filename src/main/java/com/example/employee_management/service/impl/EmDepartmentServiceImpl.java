@@ -59,4 +59,14 @@ public class EmDepartmentServiceImpl implements EmDepartmentService {
         }
         return deptMap;
     }
+
+    @Override
+    public Integer addDepartment(EmDepartment department) {
+        return departmentMapper.insert(department);
+    }
+
+    @Override
+    public Integer editDepartment(EmDepartment department) {
+        return departmentMapper.updateById(department);
+    }
 }

@@ -46,7 +46,7 @@ public class EmDepartment implements Serializable {
     /**
      * 负责人
      */
-    private String owner;
+    private Integer owner;
 
     /**
      * 备注
