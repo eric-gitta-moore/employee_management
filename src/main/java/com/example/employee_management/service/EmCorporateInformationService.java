@@ -16,4 +16,9 @@ public interface EmCorporateInformationService{
     String getOperationsStatus(int id);
 
     boolean changeOperationsStatus(int id,String state);
+
+    boolean cancelEnterprise(int id);
+
+
+
 }

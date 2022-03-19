@@ -2,6 +2,7 @@ package com.example.employee_management.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.example.employee_management.common.utils.FileUtil;
 import com.example.employee_management.entity.EmCorporateInformation;
 import com.example.employee_management.mapper.EmCorporateInformationMapper;
 import com.example.employee_management.service.EmCorporateInformationService;
@@ -52,6 +53,22 @@ public class EmCorporateInformationServiceImpl implements EmCorporateInformation
     }
 
     /**
+     *  注销企业
+     *  并且删除企业有关文件
+     * @param id
+     * @return 返回结果
+     */
+    @Override
+    public boolean cancelEnterprise(int id) {
+        List<String> imgUrl = mapper.getImgUrl(id);
+        FileUtil.deleteFile((String[]) imgUrl.toArray());
+        String logo = mapper.selectList(new QueryWrapper<EmCorporateInformation>().select("logo").eq("id",id)).get(0).getLogo();
+        FileUtil.deleteFile(logo);
+        return mapper.cancelEnterprise(id);
+
+    }
+
+    /**
      * 更新操作记录
      * @param id
      */
@@ -59,5 +76,7 @@ public class EmCorporateInformationServiceImpl implements EmCorporateInformation
         EmCorporateInformation admin = new EmCorporateInformation().setUpdateBy("admin").setUpdateTime(LocalDateTime.now());
         mapper.update(admin,new UpdateWrapper<EmCorporateInformation>().eq("id",id));
     }
+
+
 
 }

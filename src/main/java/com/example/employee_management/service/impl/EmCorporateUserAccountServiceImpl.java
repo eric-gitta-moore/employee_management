@@ -2,6 +2,8 @@ package com.example.employee_management.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.employee_management.entity.EmCorporateInformation;
 import com.example.employee_management.entity.EmCorporateUserAccount;
 import com.example.employee_management.mapper.EmCorporateInformationMapper;
@@ -54,11 +56,31 @@ public class EmCorporateUserAccountServiceImpl implements EmCorporateUserAccount
         return result!=0;
     }
 
+    /**
+     * 删除企业用户
+     * @param id
+     * @return
+     */
     @Override
     public boolean deleteAccount(int id) {
         int result = mapper.delete(new UpdateWrapper<EmCorporateUserAccount>().eq("id",id));
         return result!=0;
     }
+
+    /**
+     * 默认查询
+     * @param currentPage
+     * @return
+     */
+    @Override
+    public IPage getUserAccount(int currentPage,String keyword) {
+        Page<EmCorporateUserAccount> page = new Page(currentPage,5);
+        mapper.findByKeyword(page, keyword);
+        System.out.println(page.getTotal());
+        return page;
+    }
+
+
 
     /**
      * 更新操作记录

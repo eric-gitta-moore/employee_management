@@ -1,9 +1,12 @@
 package com.example.employee_management.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.employee_management.common.utils.Result;
 import com.example.employee_management.service.EmCorporateInformationService;
 import com.example.employee_management.service.EmCorporateUserAccountService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,12 +17,14 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/em-corporate-user-account")
+@Api(value = "EmCorporateUserAccountController",tags = {"刘锦堂===>企业用户账号管理接口"})
 public class EmCorporateUserAccountController {
 
     @Autowired
     EmCorporateUserAccountService service;
 
 
+    @ApiOperation("根据Id获取企业用户状态")
     @GetMapping("/getStatus")
     public Result getOperationsStatus(int id){
         String operationsStatus = service.getStatus(id);
@@ -30,6 +35,7 @@ public class EmCorporateUserAccountController {
         }
     }
 
+    @ApiOperation("根据Id更改企业用户状态")
     @PutMapping("/changeStatus")
     public Result changeOperationsStatus(int id,String oldState){
         try {
@@ -41,6 +47,7 @@ public class EmCorporateUserAccountController {
     }
 
     @DeleteMapping("/deleteAccount")
+    @ApiOperation("删除企业用户")
     public Result deleteAccount(int id){
         boolean isDeleted = service.deleteAccount(id);
         if(isDeleted){
@@ -48,5 +55,21 @@ public class EmCorporateUserAccountController {
         }else {
             return Result.fail("用户不存在");
         }
+    }
+
+
+    /**
+     * 获取企业用户信息，keyword为空时搜索全部
+     * @param currentPage
+     * @param keyword
+     * @return
+     */
+    @GetMapping("/getUserAccount")
+    @ApiOperation("获取企业用户信息，keyword为空时搜索全部，key关键字对用户名和企业名进行搜索")
+    public Result findByKeyword(@RequestParam(name = "currentPage",defaultValue = "1") Integer currentPage,
+                                @RequestParam(name = "keyword") String keyword ){
+        IPage userAccount = service.getUserAccount(currentPage,keyword);
+        System.out.println(userAccount.getTotal());
+        return Result.success(userAccount);
     }
 }

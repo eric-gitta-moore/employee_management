@@ -1,7 +1,10 @@
 package com.example.employee_management.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.employee_management.entity.EmCorporateUserAccount;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,4 +17,7 @@ public interface EmCorporateUserAccountService{
     boolean changeStatus(int id,String state);
 
     boolean deleteAccount(int id);
+
+
+    IPage getUserAccount(int currentPage,String keyword);
 }

@@ -80,5 +80,10 @@ public class EmCorporateUserAccount implements Serializable {
      */
     private String updateBy;
 
+    /**
+     * 所属企业
+     */
+    EmCorporateInformation emCorporateInformation;
+
 
 }

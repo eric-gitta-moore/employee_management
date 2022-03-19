@@ -76,6 +76,11 @@ public class FileUtil {
         return pictureStorage(storePath,file);
     }
 
+    /**
+     * 根据路径删除文件
+     * @param url
+     * @return
+     */
     public static boolean deleteFile(String url){
         File file = new File(catalogue+url);
         if (file.exists()){
@@ -84,7 +89,12 @@ public class FileUtil {
         }else {
             return false;
         }
+    }
 
+    public static void deleteFile(String[] urls){
+        for (String url:urls){
+            deleteFile(url);
+        }
     }
 
 }
