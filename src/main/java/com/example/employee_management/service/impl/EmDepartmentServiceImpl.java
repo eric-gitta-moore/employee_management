@@ -60,11 +60,21 @@ public class EmDepartmentServiceImpl implements EmDepartmentService {
         return deptMap;
     }
 
+    /**
+     * 添加部门
+     * @param department 部门信息
+     * @return 影响行数
+     */
     @Override
     public Integer addDepartment(EmDepartment department) {
         return departmentMapper.insert(department);
     }
 
+    /**
+     * 编辑部门
+     * @param department 部门信息
+     * @return 影响行数
+     */
     @Override
     public Integer editDepartment(EmDepartment department) {
         return departmentMapper.updateById(department);
