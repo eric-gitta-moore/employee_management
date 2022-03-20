@@ -25,34 +25,25 @@ public class EmCorporateUserAccountController {
     EmCorporateUserAccountService service;
 
 
-    @ApiOperation("根据Id获取企业用户状态，id：企业用户id")
-    @GetMapping("/getStatus")
-    public Result getOperationsStatus(@RequestParam(name = "id") int id){
-        String operationsStatus = service.getStatus(id);
-        if(operationsStatus!=null){
-            return Result.success(operationsStatus);
-        }else{
-            return Result.fail("当前用户不存在");
-        }
-    }
 
-    @ApiOperation("根据Id更改企业用户状态，id 企业用户id，oldState 当前的状态")
+    @ApiOperation("根据Id更改企业用户状态，id 企业用户id，newState 要改变的状态")
     @PutMapping("/changeStatus")
-    public Result changeOperationsStatus(@RequestParam(name = "id") int id,@RequestParam(name = "oldState") String oldState){
-        try {
-            service.changeStatus(id,oldState);
-            return Result.success("改变状态成功");
-        }catch (Exception e){
-            return Result.fail("改变状态失败");
+    public Result changeOperationsStatus(@RequestParam(name = "id") int id,@RequestParam(name = "newState") String newState){
+        //过去改变状态结果
+        String result = service.changeStatus(id,newState);
+        if (result.equals("succeed")){
+            return Result.success(result);
+        }else {
+            return Result.fail(result);
         }
     }
 
     @DeleteMapping("/deleteAccount")
-    @ApiOperation("删除企业用户，id：企业用户id")
+    @ApiOperation("注销企业用户，id：企业用户id")
     public Result deleteAccount(@RequestParam(name = "id") int id){
         boolean isDeleted = service.deleteAccount(id);
         if(isDeleted){
-            return Result.success("删除成功");
+            return Result.success("注销成功");
         }else {
             return Result.fail("用户不存在");
         }

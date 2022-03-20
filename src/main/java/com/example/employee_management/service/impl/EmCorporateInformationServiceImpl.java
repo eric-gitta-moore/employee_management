@@ -27,11 +27,11 @@ public class EmCorporateInformationServiceImpl implements EmCorporateInformation
      * @param id
      * @return
      */
-    @Override
     public String getOperationsStatus(int id) {
         List<EmCorporateInformation> emCorporateInformation = mapper.selectList(new QueryWrapper<EmCorporateInformation>()
                 .select("operations_status")
                 .eq("id", id));
+        //企业不存在时返回null
         if(emCorporateInformation.size()==0){
             return null;
         }
@@ -41,17 +41,24 @@ public class EmCorporateInformationServiceImpl implements EmCorporateInformation
     /**
      * 改变企业运营状态
      * @param id
-     * @param oldState
+     * @param newState
      * @return
      */
     @Override
-    public boolean changeOperationsStatus(int id, String oldState) {
-        String newState;
-        newState = oldState.equals("enable")?"pause":"enable";
+    public String changeOperationsStatus(int id, String newState) {
+        //获取旧状态，判断是否存在或需要修改
+        String oldState=getOperationsStatus(id);
+        if(oldState==null){
+            return "企业不存在或已被注销";
+        }
+        if(oldState.equals(newState)){
+            return "已启用或暂停，不要重复请求";
+        }
+        //更新状态
         EmCorporateInformation emCorporateInformation = new EmCorporateInformation().setId(id).setOperationsStatus(newState);
-        int result =  mapper.update(emCorporateInformation,new UpdateWrapper<EmCorporateInformation>().eq("id",id));
+        mapper.update(emCorporateInformation,new UpdateWrapper<EmCorporateInformation>().eq("id",id));
         updateOperationRecord(id);
-        return result!=0;
+        return "succeed";
     }
 
     /**

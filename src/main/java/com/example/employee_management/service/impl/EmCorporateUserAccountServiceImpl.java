@@ -4,12 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.employee_management.entity.EmCorporateInformation;
 import com.example.employee_management.entity.EmCorporateUserAccount;
-import com.example.employee_management.mapper.EmCorporateInformationMapper;
 import com.example.employee_management.mapper.EmCorporateUserAccountMapper;
 import com.example.employee_management.service.EmCorporateUserAccountService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,16 +24,16 @@ public class EmCorporateUserAccountServiceImpl implements EmCorporateUserAccount
     EmCorporateUserAccountMapper mapper;
 
     /**
-     * 获取当前员工状态
+     * 获取当前员工状态，
      * @param id
      * @return
      */
-    @Override
     public String getStatus(int id) {
         List<EmCorporateUserAccount> emCorporateUserAccounts = mapper.selectList(new QueryWrapper<EmCorporateUserAccount>()
                 .select("status")
                 .eq("id", id));
         updateOperationRecord(id);
+        //员工不存在时返回null
         if(emCorporateUserAccounts.size()==0){
             return null;
         }
@@ -46,17 +43,24 @@ public class EmCorporateUserAccountServiceImpl implements EmCorporateUserAccount
     /**
      * 改变员工状态
      * @param id
-     * @param oldState
+     * @param newState
      * @return
      */
     @Override
-    public boolean changeStatus(int id, String oldState) {
-        String newState;
-        newState = oldState.equals("enable")?"pause":"enable";
+    public String changeStatus(int id, String newState) {
+        //获取旧状态，判断是否存在或需要修改
+        String oldState = getStatus(id);
+        if (oldState==null){
+            return "用户不存在或已被注销";
+        }
+        if(oldState.equals(newState)){
+            return "已启用或暂停，不要重复请求";
+        }
+        //更新状态
         EmCorporateUserAccount emCorporateUserAccount = new EmCorporateUserAccount().setId(id).setStatus(newState);
-        int result =  mapper.update(emCorporateUserAccount,new UpdateWrapper<EmCorporateUserAccount>().eq("id",id));
+        mapper.update(emCorporateUserAccount,new UpdateWrapper<EmCorporateUserAccount>().eq("id",id));
         updateOperationRecord(id);
-        return result!=0;
+        return "succeed";
     }
 
     /**

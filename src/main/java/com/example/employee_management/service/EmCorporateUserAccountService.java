@@ -1,10 +1,6 @@
 package com.example.employee_management.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.example.employee_management.entity.EmCorporateUserAccount;
-import com.baomidou.mybatisplus.extension.service.IService;
-
-import java.util.List;
 
 /**
  * <p>
@@ -12,9 +8,8 @@ import java.util.List;
  * </p>
  */
 public interface EmCorporateUserAccountService{
-    String getStatus(int id);
 
-    boolean changeStatus(int id,String state);
+    String changeStatus(int id, String state);
 
     boolean deleteAccount(int id);
 
