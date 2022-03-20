@@ -24,7 +24,7 @@ public class EmCorporateUserAccountController {
     EmCorporateUserAccountService service;
 
 
-    @ApiOperation("根据Id获取企业用户状态")
+    @ApiOperation("根据Id获取企业用户状态，id：企业用户id")
     @GetMapping("/getStatus")
     public Result getOperationsStatus(int id){
         String operationsStatus = service.getStatus(id);
@@ -35,7 +35,7 @@ public class EmCorporateUserAccountController {
         }
     }
 
-    @ApiOperation("根据Id更改企业用户状态")
+    @ApiOperation("根据Id更改企业用户状态，id 企业用户id，oldState 当前的状态")
     @PutMapping("/changeStatus")
     public Result changeOperationsStatus(int id,String oldState){
         try {
@@ -47,7 +47,7 @@ public class EmCorporateUserAccountController {
     }
 
     @DeleteMapping("/deleteAccount")
-    @ApiOperation("删除企业用户")
+    @ApiOperation("删除企业用户，id：企业用户id")
     public Result deleteAccount(int id){
         boolean isDeleted = service.deleteAccount(id);
         if(isDeleted){
@@ -65,13 +65,10 @@ public class EmCorporateUserAccountController {
      * @return
      */
     @GetMapping("/getUserAccount")
-    @ApiOperation("获取企业用户信息，keyword为空时搜索全部，key关键字对用户名和企业名进行搜索")
+    @ApiOperation("获取企业用户信息，keyword为空时搜索全部，key关键字对用户名和企业名进行搜索，currentPage：页码，keyword：关键字")
     public Result findByKeyword(@RequestParam(name = "currentPage",defaultValue = "1") Integer currentPage,
                                 @RequestParam(name = "keyword") String keyword ){
         IPage userAccount = service.getUserAccount(currentPage,keyword);
-        if(userAccount.getTotal()==0){
-            Result.fail("查询不到数据");
-        }
         return Result.success(userAccount);
     }
 }
