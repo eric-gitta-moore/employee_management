@@ -15,6 +15,9 @@ public class FileUtil {
 
     private static String catalogue = "src/main/resources/static/";
 
+    public static String getCatalogue() {
+        return catalogue;
+    }
 
     /**
      * 存放在static下的自定义的文件夹中

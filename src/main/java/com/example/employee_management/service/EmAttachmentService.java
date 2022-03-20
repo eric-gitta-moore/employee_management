@@ -22,5 +22,10 @@ public interface EmAttachmentService {
      */
     EmAttachment uploadAvatar(int employeeId, MultipartFile file) throws IOException;
 
-
+    /**
+     * 获取附件信息
+     * @param attachId
+     * @return
+     */
+    EmAttachment getAttachInfo(int attachId);
 }

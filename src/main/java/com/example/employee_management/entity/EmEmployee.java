@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * <p>
@@ -71,12 +72,14 @@ public class EmEmployee implements Serializable {
      * 入职时间
      */
     @ApiModelProperty("入职时间")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime entryTime;
 
     /**
      * 离职时间
      */
     @ApiModelProperty("离职时间")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime departureTime;
 
     /**
@@ -84,6 +87,12 @@ public class EmEmployee implements Serializable {
      */
     @ApiModelProperty("头像")
     private Integer avatar;
+
+    /**
+     * 头像附件对象，不是数据库中的字段
+     */
+    @ApiModelProperty("头像附件对象")
+    private EmAttachment avatarAttachment;
 
     /**
      * 员工编号
@@ -130,6 +139,7 @@ public class EmEmployee implements Serializable {
      * 转正时间
      */
     @ApiModelProperty("转正时间")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime regularTime;
 
     /**

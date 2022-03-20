@@ -25,10 +25,10 @@
                 #{type},
                 #{regularTime},
                 #{comment},
-                #{createTime},
-                #{updateTime},
-                #{createBy},
-                #{updateBy})
+                now(),
+                now(),
+                "admin",
+                "admin")
     </insert>
 
     <update id="updateById" parameterType="com.example.employee_management.entity.EmEmployee">
