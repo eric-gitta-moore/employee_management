@@ -1,8 +1,10 @@
 package com.example.employee_management.common.utils;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 @Data
+@ApiModel("结果集对象")
 public class Result {
     //状态码
     private int code;

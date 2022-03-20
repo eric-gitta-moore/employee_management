@@ -2,4 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.employee_management.mapper.EmCorporateInformationMapper">
 
+    <select id="getAllMsg" resultType="com.example.employee_management.entity.EmAttachmentAndEmCorporateInformation">
+        SELECT
+            corInfo.id,
+            corInfo.corporate_name,
+            corInfo.review_status,
+            corInfo.legal_entity,
+            corInfo.summary,
+            corInfo.certificate_for_uniform_social_credit_code,
+            attach1.path AS path1,
+            attach2.path AS path2,
+            attach3.path AS path3,
+            attach4.path AS path4,
+            attach5.path AS path5
+
+        FROM
+            em_corporate_information AS corInfo
+                LEFT JOIN em_attachment AS attach1 ON corInfo.business_license = attach1.id
+                LEFT JOIN em_attachment AS attach2 ON corInfo.legal_entity_identity_card_img_positive = attach2.id
+                LEFT JOIN em_attachment AS attach3 ON corInfo.legal_entity_identity_card_img_rear = attach3.id
+                LEFT JOIN em_attachment AS attach4 ON corInfo.contact_person_identity_card_img_positive = attach4.id
+                LEFT JOIN em_attachment AS attach5 ON corInfo.contact_person_identity_card_img_rear = attach5.id
+        WHERE
+            corInfo.id=#{id}
+    </select>
+
+
+
+    <select id="sortByTime" resultType="com.example.employee_management.entity.EmCorporateInformation">
+        SELECT
+            *
+        FROM
+            em_corporate_information AS corInfo
+                LEFT JOIN em_attachment AS attach1 ON corInfo.business_license = attach1.id
+                LEFT JOIN em_attachment AS attach2 ON corInfo.legal_entity_identity_card_img_positive = attach2.id
+                LEFT JOIN em_attachment AS attach3 ON corInfo.legal_entity_identity_card_img_rear = attach3.id
+                LEFT JOIN em_attachment AS attach4 ON corInfo.contact_person_identity_card_img_positive = attach4.id
+                LEFT JOIN em_attachment AS attach5 ON corInfo.contact_person_identity_card_img_rear = attach5.id
+        ORDER BY
+            corInfo.create_time DESC
+    </select>
+
+
 </mapper>

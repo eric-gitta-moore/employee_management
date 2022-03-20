@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -18,6 +21,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("em_corporate_information")
+@ApiModel("企业信息管理类")
 public class EmCorporateInformation implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,6 +32,7 @@ public class EmCorporateInformation implements Serializable {
     /**
      * 实体租户名称（企业名称）（企业全称）
      */
+    @ApiModelProperty("企业名称")
     private String corporateName;
 
     /**
