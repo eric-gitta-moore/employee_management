@@ -1,6 +1,7 @@
 package com.example.employee_management.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.employee_management.common.utils.Result;
 import com.example.employee_management.common.utils.SmsUtil;
 import com.example.employee_management.common.utils.ToolsUtil;
@@ -8,6 +9,8 @@ import com.example.employee_management.entity.EmEmployee;
 import com.example.employee_management.service.EmDepartmentService;
 import com.example.employee_management.service.EmEmployeeService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import jdk.nashorn.internal.ir.SetSplitState;
 import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +48,30 @@ public class EmEmployeeController {
     @GetMapping("/findOne")
     public Result findOne(int id) {
         return Result.success(employeeService.findOne(id));
+    }
+
+    /**
+     * 分页搜索查询员工列表
+     * @param json 查询参数
+     * @return
+     */
+    @ApiOperation("分页搜索查询员工列表")
+    @PostMapping("/selectList")
+    public Result selectList(@RequestBody HashMap<String, String> json) {
+        int currentPage = 1;
+        int pageSize = 10;
+        if (json.containsKey("currentPage")) {
+            currentPage = Integer.parseInt((String) json.get("currentPage"));
+        }
+        if (json.containsKey("pageSize")) {
+            pageSize = Integer.parseInt((String) json.get("pageSize"));
+        }
+
+        IPage<EmEmployee> result = employeeService.selectByParam(currentPage, pageSize, json);
+//        HashMap<String, Object> resultMap = new HashMap<>();
+//        resultMap.put("data", result);
+//        resultMap.put("total",)
+        return Result.success(result);
     }
 
     /**
