@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 /**
  * <p>
  * 企业信息管理 前端控制器
@@ -21,11 +23,21 @@ public class EmCorporateInformationController {
     EmCorporateInformationService service;
 
 
+    /**
+     *  改变企业运营状态
+     * @param map id：企业Id，newState：要改变为什么状态
+     * @return
+     */
     @PutMapping("/changeOperationsStatus")
     @ApiOperation("根据Id更改企业运营状态，id：企业Id，newState：要改变为什么状态")
-    public Result changeOperationsStatus(@RequestParam(name = "id") int id,@RequestParam(name = "newState")String newState){
+    public Result changeOperationsStatus(@RequestBody Map<String,String> map){
+        String id = map.get("id");
+        String newState = map.get("newState");
+        if(id==null || newState==null){
+            return Result.fail("id或newState不能为空");
+        }
         //获取修改结果
-        String result = service.changeOperationsStatus(id, newState);
+        String result = service.changeOperationsStatus(Integer.parseInt(id), newState);
         if(result.equals("succeed")){
             return Result.success(result);
         }else {
@@ -37,15 +49,19 @@ public class EmCorporateInformationController {
     }
 
     /**
-     *  注销企业，并删除所有相关的东西
-     * @param id
+     *
+     * @param map id：企业Id
      * @return
      */
     @DeleteMapping("/cancelEnterprise")
     @ApiOperation("注销企业，并删除所有相关的东西，id：企业Id")
-    public Result cancelEnterprise(@RequestParam(name = "id")int id){
+    public Result cancelEnterprise(@RequestBody Map<String,String> map){
+        String id = map.get("id");
+        if(id==null){
+            return Result.fail("id不能为空");
+        }
         //获取注销结果
-        boolean succeed = service.cancelEnterprise(id);
+        boolean succeed = service.cancelEnterprise(Integer.parseInt(id));
         if(succeed){
             return Result.success("注销成功");
         }
