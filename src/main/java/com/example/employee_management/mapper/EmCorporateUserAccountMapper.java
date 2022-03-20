@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.employee_management.entity.EmCorporateUserAccount;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * 企业用户账号管理 Mapper 接口
  * </p>
  */
+@Repository
 public interface EmCorporateUserAccountMapper extends BaseMapper<EmCorporateUserAccount> {
     /**
      * 通过关键字查询

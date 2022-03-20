@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -31,6 +34,11 @@ public class EmDepartment implements Serializable {
     private String departmentName;
 
     /**
+     * 所属企业
+     */
+    private Integer corporateId;
+
+    /**
      * 上级部门id,0为顶级部门
      */
     private Integer superiorDepartment;
@@ -38,7 +46,7 @@ public class EmDepartment implements Serializable {
     /**
      * 负责人
      */
-    private String owner;
+    private Integer owner;
 
     /**
      * 备注
@@ -64,6 +72,10 @@ public class EmDepartment implements Serializable {
      * 更新者
      */
     private String updateBy;
+
+
+    /** 子部门 */
+    private List<EmDepartment> children = new ArrayList<>();
 
 
 }
