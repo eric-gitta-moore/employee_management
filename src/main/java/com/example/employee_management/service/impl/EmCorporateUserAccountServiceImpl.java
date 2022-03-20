@@ -96,4 +96,34 @@ public class EmCorporateUserAccountServiceImpl implements EmCorporateUserAccount
         EmCorporateUserAccount admin = new EmCorporateUserAccount().setUpdateBy("admin").setUpdateTime(LocalDateTime.now());
         mapper.update(admin,new UpdateWrapper<EmCorporateUserAccount>().eq("id",id));
     }
+
+
+    /**
+     * 更改手机号码
+     *
+     * @param id    账号id
+     * @param phone 手机号
+     * @return 更改是否成功
+     */
+    @Override
+    public boolean changePhone(int id, String phone) {
+        EmCorporateUserAccount admin = new EmCorporateUserAccount().setPhone(phone);
+        updateOperationRecord(id);
+        return mapper.update(admin,new UpdateWrapper<EmCorporateUserAccount>().eq("id",id)) > 0;
+    }
+
+    /**
+     * 更改密码
+     *
+     * @param id  账号ID
+     * @param pwd 密码
+     * @return
+     */
+    @Override
+    public boolean changePasswd(int id, String pwd) {
+//        EmCorporateUserAccount admin = new EmCorporateUserAccount().setPhone(phone);
+//        updateOperationRecord(id);
+//        return mapper.update(admin,new UpdateWrapper<EmCorporateUserAccount>().eq("id",id)) > 0;
+        return false;
+    }
 }

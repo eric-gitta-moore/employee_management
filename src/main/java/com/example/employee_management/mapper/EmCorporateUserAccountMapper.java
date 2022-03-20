@@ -30,4 +30,12 @@ public interface EmCorporateUserAccountMapper extends BaseMapper<EmCorporateUser
      * @return
      */
     Page<EmCorporateUserAccount> findByKeyword(@Param("page")Page<EmCorporateUserAccount> page);
+
+    /**
+     * 更新手机号
+     * @param phone
+     * @param id
+     * @return
+     */
+    int updatePhoneById(@Param("phone") String phone,@Param("id") int id);
 }

@@ -19,14 +19,20 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/em-department")
-@Api(value = "EmDepartmentController",tags = {"部门增删改查API"})
+@Api(value = "EmDepartmentController", tags = {"部门增删改查API"})
 public class EmDepartmentController {
 
     @Autowired
     private EmDepartmentService departmentService;
 
     /**
+     * 当前部门id
+     */
+    private int currentCorporateId = 1;
+
+    /**
      * 获取部门树状下拉表
+     *
      * @return
      */
     @ApiOperation("获取部门树状下拉表")
@@ -38,6 +44,7 @@ public class EmDepartmentController {
 
     /**
      * 添加部门
+     *
      * @param department 部门信息
      * @return
      */
@@ -54,6 +61,7 @@ public class EmDepartmentController {
 
     /**
      * 编辑部门
+     *
      * @param department 部门信息
      * @return
      */
@@ -66,5 +74,15 @@ public class EmDepartmentController {
         } else {
             return Result.fail("修改失败");
         }
+    }
+
+    /**
+     * 获取部门列表
+     * @return
+     */
+    @ApiOperation("获取部门列表")
+    @GetMapping("/getDepartmentList")
+    public Result getDepartmentList() {
+        return Result.success(departmentService.selectDeptList(this.currentCorporateId));
     }
 }

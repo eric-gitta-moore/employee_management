@@ -15,4 +15,20 @@ public interface EmCorporateUserAccountService{
 
 
     IPage getUserAccount(int currentPage,String keyword,int size);
+
+    /**
+     * 更改手机号码
+     * @param id 账号id
+     * @param phone 手机号
+     * @return 更改是否成功
+     */
+    boolean changePhone(int id, String phone);
+
+    /**
+     * 更改密码
+     * @param id 账号ID
+     * @param pwd 密码
+     * @return
+     */
+    boolean changePasswd(int id, String pwd);
 }
