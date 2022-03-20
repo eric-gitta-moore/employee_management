@@ -27,20 +27,16 @@ public class FileUtil {
      * @return 文件路径
      * @throws IOException
      */
-    public static String pictureStorage(String route, MultipartFile file) throws IOException {
-        InputStream inputStream = file.getInputStream();
-        String filename = file.getOriginalFilename();
-        String suffix = filename.split("\\.")[1];
-        String uuid = UUID.randomUUID().toString();
-        String outFileName = catalogue + route + "/" + uuid + "." + suffix;
-
-        try (OutputStream outputStream = new FileOutputStream(outFileName)) {
-            IOUtils.copy(inputStream, outputStream);
-            return route + "/" + uuid + "." + suffix;
-        } catch (IOException e) {
+    public static String pictureStorage(String route,MultipartFile file) throws IOException {
+        byte [] bytes = file.getBytes();
+        String imgName = UUID.randomUUID().toString();
+        try {
+            String url = QiniuCloudUtil.put64image(bytes,imgName);
+            return url;
+        } catch (Exception e) {
             e.printStackTrace();
-            throw e;
         }
+        return null;
     }
 
     /**
@@ -63,7 +59,7 @@ public class FileUtil {
      * @return 文件路径数组
      */
     public static String[] pictureStorage(String route, MultipartFile[] file) throws IOException {
-        String[] strings = new String[5];
+        String[] strings = new String[file.length];
 
 
         for (int i = 0; i < file.length; i++) {

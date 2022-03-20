@@ -63,14 +63,11 @@ public class EmCorporateInformationServiceImpl implements EmCorporateInformation
 
     /**
      *  注销企业
-     *  并且删除企业有关文件
      * @param id
      * @return 返回结果
      */
     @Override
     public boolean cancelEnterprise(int id) {
-        List<String> imgUrl = mapper.getImgUrl(id);
-        FileUtil.deleteFile((String[]) imgUrl.toArray());
         return mapper.cancelEnterprise(id);
     }
 
