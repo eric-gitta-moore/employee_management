@@ -3,6 +3,7 @@ package com.example.employee_management.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.employee_management.common.utils.Result;
+import com.example.employee_management.common.utils.SmsUtil;
 import com.example.employee_management.service.EmCorporateInformationService;
 import com.example.employee_management.service.EmCorporateUserAccountService;
 import io.swagger.annotations.Api;
@@ -10,6 +11,9 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 
 /**
  * <p>
@@ -63,5 +67,66 @@ public class EmCorporateUserAccountController {
                                 @RequestParam(name = "size",defaultValue = "5")Integer size){
         IPage userAccount = service.getUserAccount(currentPage,keyword,size);
         return Result.success(userAccount);
+    }
+
+
+    /**
+     * 发送验证码
+     * @param phone 手机号
+     * @param session
+     * @return
+     */
+    @ApiOperation("发送验证码")
+    @GetMapping("/sendSms")
+    public Result sendSms(String phone, HttpSession session) {
+        if (session.getAttribute("smsCode") == null) {
+            HashMap<String, HashMap<String, Object>> codeList = new HashMap<>();
+            session.setAttribute("smsCode", codeList);
+        }
+        HashMap<String, HashMap<String, Object>> list = (HashMap<String, HashMap<String, Object>>) session.getAttribute("smsCode");
+        String code = SmsUtil.random();
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("phone", phone);
+        map.put("code", code);
+        list.put(phone,map);
+        session.setAttribute("smsCode", list);
+        System.out.println(session.getAttribute("smsCode"));
+        return SmsUtil.sendSms(code, phone) ? Result.success("发送成功") : Result.fail("发送失败");
+    }
+
+    /**+
+     * 确认修改手机号
+     * @param id 企业账号id
+     * @param originPhone 原手机号
+     * @param originPhoneCode 原手机收到的验证码
+     * @param newPhone 新手机号
+     * @param newPhoneCode 新手机号收到的验证码
+     * @param session
+     * @return
+     */
+    @ApiOperation("确认修改手机号")
+    @PutMapping("/submitChangePhone")
+    public Result submitChangePhone(int id,
+                                    String originPhone, String originPhoneCode,
+                                    String newPhone,String newPhoneCode,
+                                    HttpSession session) {
+
+        if (session.getAttribute("smsCode") == null) {
+            return Result.fail("请先获取验证码");
+        }
+        HashMap<String, HashMap<String, Object>> list = (HashMap<String, HashMap<String, Object>>) session.getAttribute("smsCode");
+        System.out.println(list.toString());
+        if (!list.containsKey(originPhone) || !list.containsKey(newPhone)) {
+            return Result.fail("请先获取验证码");
+        }
+        if (list.get(originPhone).get("code").equals(originPhoneCode) &&
+                list.get(newPhone).get("code").equals(newPhoneCode)) {
+            boolean result = service.changePhone(id, newPhone);
+            if (result) {
+                session.removeAttribute("smsCode");
+            }
+            return result?Result.success("修改成功"):Result.fail("修改失败");
+        }
+        return Result.fail("验证码错误");
     }
 }
