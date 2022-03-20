@@ -1,10 +1,20 @@
 package com.example.employee_management.controller;
 
 
-import io.swagger.annotations.Api;
+
+import com.example.employee_management.common.utils.Result;
+import com.example.employee_management.entity.EmAttachment;
+import com.example.employee_management.entity.EmEmployee;
+import com.example.employee_management.service.EmAttachmentService;
+import com.example.employee_management.service.EmEmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>
@@ -16,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmAttachmentController {
     @Autowired
     EmAttachmentService attachmentService;
+
 
     @Autowired
     EmEmployeeService employeeService;
@@ -43,7 +54,5 @@ public class EmAttachmentController {
         }
         return Result.success(attachment);
     }
-
-
 
 }

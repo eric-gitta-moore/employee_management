@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -19,13 +18,11 @@ public class EmAttachmentAndEmCorporateInformation {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("企业id")
-    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**
      * 实体租户名称（企业名称）（企业全称）
      */
-    @ApiParam("企业名称")
     @ApiModelProperty("企业名称")
     private String corporateName;
 
