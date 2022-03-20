@@ -19,5 +19,5 @@ public interface EmCorporateUserAccountService{
     boolean deleteAccount(int id);
 
 
-    IPage getUserAccount(int currentPage,String keyword);
+    IPage getUserAccount(int currentPage,String keyword,int size);
 }

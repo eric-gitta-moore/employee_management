@@ -65,10 +65,11 @@ public class EmCorporateUserAccountController {
      * @return
      */
     @GetMapping("/getUserAccount")
-    @ApiOperation("获取企业用户信息，keyword为空时搜索全部，key关键字对用户名和企业名进行搜索，currentPage：页码，keyword：关键字")
+    @ApiOperation("获取企业用户信息，keyword为空时搜索全部，key关键字对用户名和企业名进行搜索，currentPage：页码，keyword：关键字,size:每页的数量，默认值为5")
     public Result findByKeyword(@RequestParam(name = "currentPage",defaultValue = "1") Integer currentPage,
-                                @RequestParam(name = "keyword") String keyword ){
-        IPage userAccount = service.getUserAccount(currentPage,keyword);
+                                @RequestParam(name = "keyword") String keyword,
+                                @RequestParam(name = "size",defaultValue = "5")Integer size){
+        IPage userAccount = service.getUserAccount(currentPage,keyword,size);
         return Result.success(userAccount);
     }
 }

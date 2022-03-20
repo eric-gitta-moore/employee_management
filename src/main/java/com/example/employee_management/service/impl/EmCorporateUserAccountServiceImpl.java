@@ -73,8 +73,8 @@ public class EmCorporateUserAccountServiceImpl implements EmCorporateUserAccount
      * @return
      */
     @Override
-    public IPage getUserAccount(int currentPage,String keyword) {
-        Page<EmCorporateUserAccount> page = new Page(currentPage,5);
+    public IPage getUserAccount(int currentPage,String keyword,int size) {
+        Page<EmCorporateUserAccount> page = new Page(currentPage,size);
         mapper.findByKeyword(page, keyword);
         System.out.println(page.getTotal());
         return page;
