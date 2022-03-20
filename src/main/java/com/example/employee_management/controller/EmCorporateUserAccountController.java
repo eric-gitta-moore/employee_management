@@ -75,7 +75,7 @@ public class EmCorporateUserAccountController {
      * @param map 接收所有参数 currentPage：页码，keyword：关键字,size:每页的数量，默认值为5
      * @return
      */
-    @GetMapping("/getUserAccount")
+    @PostMapping("/getUserAccount")
     @ApiOperation("获取企业用户信息，keyword为空时搜索全部，key关键字对用户名和企业名进行搜索，currentPage：页码，keyword：关键字,size:每页的数量，默认值为5")
     public Result findByKeyword(@RequestBody Map<String,String> map){
         String currentPage = map.get("currentPage");
