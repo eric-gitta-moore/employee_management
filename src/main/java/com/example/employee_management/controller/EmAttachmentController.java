@@ -35,11 +35,11 @@ public class EmAttachmentController {
      * @return
      */
     @PutMapping("/uploadAvartar")
-    public Result uploadAvatar(int employeeId, MultipartFile file) {
+    public Result uploadAvatar(String employeeId, MultipartFile file) {
         if (file.isEmpty()) {
             return Result.fail("上传文件不能为空");
         }
-        EmEmployee employee = employeeService.findOne(employeeId);
+        EmEmployee employee = employeeService.findOne(Integer.parseInt(employeeId));
         if (employee == null) {
             return Result.fail("该员工不存在");
         }

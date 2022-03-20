@@ -106,7 +106,7 @@ public class EmCorporateUserAccountController {
      */
     @ApiOperation("确认修改手机号")
     @PutMapping("/submitChangePhone")
-    public Result submitChangePhone(int id,
+    public Result submitChangePhone(String id,
                                     String originPhone, String originPhoneCode,
                                     String newPhone,String newPhoneCode,
                                     HttpSession session) {
@@ -121,7 +121,7 @@ public class EmCorporateUserAccountController {
         }
         if (list.get(originPhone).get("code").equals(originPhoneCode) &&
                 list.get(newPhone).get("code").equals(newPhoneCode)) {
-            boolean result = service.changePhone(id, newPhone);
+            boolean result = service.changePhone(Integer.parseInt(id), newPhone);
             if (result) {
                 session.removeAttribute("smsCode");
             }
