@@ -45,7 +45,21 @@ public class EmAttachmentServiceImpl implements EmAttachmentService {
         if (effectLine == 0) {
             //异常处理
         }
-        System.out.println(att.getId());//自增id
+        //自增id
+        System.out.println(att.getId());
         return att;
+    }
+
+    /**
+     * 获取附件信息
+     *
+     * @param attachId
+     * @return
+     */
+    @Override
+    public EmAttachment getAttachInfo(int attachId) {
+        EmAttachment attachment = attachmentMapper.selectById(attachId);
+        attachment.setPath(FileUtil.getCatalogue() + attachment.getPath());
+        return attachment;
     }
 }
