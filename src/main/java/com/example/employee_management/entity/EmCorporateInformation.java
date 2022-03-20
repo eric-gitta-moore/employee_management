@@ -68,7 +68,7 @@ public class EmCorporateInformation implements Serializable {
     /**
      * 企业logo
      */
-    private String logo;
+    private Integer logo;
 
     /**
      * 所属行业
@@ -114,6 +114,11 @@ public class EmCorporateInformation implements Serializable {
      * 企业法人身份证，反面（人像），图片
      */
     private Integer legalEntityIdentityCardImgRear;
+
+    /**
+    * 企业联系人身份证号
+    */
+    private Integer contactPersonIdentityCard;
 
     /**
      * 企业联系人身份证号，正面（国徽），图片

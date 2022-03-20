@@ -10,6 +10,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -17,7 +22,14 @@ import java.util.List;
  * </p>
  */
 @Component
+@Repository
 public interface EmCorporateInformationMapper extends BaseMapper<EmCorporateInformation> {
+    /**
+     * 企业注销，删除企业有关的所有信息
+     * @param id
+     * @return
+     */
+    boolean cancelEnterprise(int id);
 
     //根据企业id查询所有联合信息
     EmAttachmentAndEmCorporateInformation getAllMsg(Integer id);
@@ -25,4 +37,10 @@ public interface EmCorporateInformationMapper extends BaseMapper<EmCorporateInfo
     //根据创建时间进行排序
     Page<EmCorporateInformation> sortByTime(@Param("page") Page<EmCorporateInformation> page);
 
+    /**
+     * 获取图片的url
+     * @param id
+     * @return
+     */
+    List<String> getImgUrl(int id);
 }
