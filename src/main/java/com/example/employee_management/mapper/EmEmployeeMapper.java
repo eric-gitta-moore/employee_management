@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
+
 /**
  * <p>
  * 员工表 Mapper 接口
@@ -12,5 +14,15 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface EmEmployeeMapper extends BaseMapper<EmEmployee> {
+    @Override
+    int insert(EmEmployee entity);
 
+    @Override
+    int updateById(EmEmployee entity);
+
+    @Override
+    EmEmployee selectById(Serializable id);
+
+    @Override
+    int deleteById(Serializable id);
 }

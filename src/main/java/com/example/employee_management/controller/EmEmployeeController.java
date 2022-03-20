@@ -1,9 +1,13 @@
 package com.example.employee_management.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import com.example.employee_management.common.utils.Result;
+import com.example.employee_management.entity.EmEmployee;
+import com.example.employee_management.service.EmDepartmentService;
+import com.example.employee_management.service.EmEmployeeService;
+import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -12,6 +16,24 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/em-employee")
+@Api(value = "EmEmployeeController", tags = {"员工管理API"})
 public class EmEmployeeController {
+    @Autowired
+    private EmEmployeeService employeeService;
 
+    @GetMapping("/findOne")
+    public Result findOne(int id) {
+        return Result.success(employeeService.findOne(id));
+    }
+
+    @PutMapping("/edit")
+    public Result edit(EmEmployee employee) {
+        int line = employeeService.editEmployee(employee);
+        return line > 0 ? Result.success("修改成功") : Result.fail("修改失败");
+    }
+
+    @DeleteMapping("/delete")
+    public Result delete(int id) {
+        return employeeService.deleteById(id) > 0 ? Result.success("删除成功") : Result.fail("删除失败");
+    }
 }

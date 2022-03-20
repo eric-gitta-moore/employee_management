@@ -25,9 +25,8 @@ public class EmEmployeeServiceImpl implements EmEmployeeService {
      * @return
      */
     @Override
-    public boolean addEmployee(EmEmployee employee) {
-        employeeMapper.insert(employee);
-        return false;
+    public int addEmployee(EmEmployee employee) {
+        return employeeMapper.insert(employee);
     }
 
     /**
@@ -37,7 +36,29 @@ public class EmEmployeeServiceImpl implements EmEmployeeService {
      * @return
      */
     @Override
-    public boolean editEmployee(EmEmployee employee) {
-        return false;
+    public int editEmployee(EmEmployee employee) {
+        return employeeMapper.updateById(employee);
+    }
+
+    /**
+     * 查找一个员工的信息
+     *
+     * @param id 员工id
+     * @return
+     */
+    @Override
+    public EmEmployee findOne(int id) {
+        return employeeMapper.selectById(id);
+    }
+
+    /**
+     * 根据id删除某个员工
+     *
+     * @param id 员工id
+     * @return 影响行数
+     */
+    @Override
+    public int deleteById(int id) {
+        return employeeMapper.deleteById(id);
     }
 }

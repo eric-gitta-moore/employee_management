@@ -2,4 +2,70 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.employee_management.mapper.EmEmployeeMapper">
 
+    <insert id="insert" parameterType="com.example.employee_management.entity.EmEmployee">
+        INSERT INTO `em_employee`(`id`, `name`, `account`, `phone`, `sex`, `job`, `status`, `entry_time`,
+                                  `departure_time`, `avatar`, `employee_number`, `department_id`, `corporate_id`,
+                                  `management_scope`, `post`, `type`, `regular_time`, `comment`, `create_time`,
+                                  `update_time`, `create_by`, `update_by`)
+        VALUES (null,
+                #{name},
+                #{account},
+                #{phone},
+                #{sex},
+                #{job},
+                #{status},
+                #{entryTime},
+                #{departureTime},
+                #{avatar},
+                #{employeeNumber},
+                #{departmentId},
+                #{corporateId},
+                #{managementScope},
+                #{post},
+                #{type},
+                #{regularTime},
+                #{comment},
+                #{createTime},
+                #{updateTime},
+                #{createBy},
+                #{updateBy})
+    </insert>
+
+    <update id="updateById" parameterType="com.example.employee_management.entity.EmEmployee">
+        UPDATE `em_employee`
+        SET `name`=#{name},
+            `account`=#{account},
+            `phone`=#{phone},
+            `sex`=#{sex},
+            `job`=#{job},
+            `status`=#{status},
+            `entry_time`=#{entryTime},
+            `departure_time`=#{departureTime},
+            `avatar`=#{avatar},
+            `employee_number`=#{employeeNumber},
+            `department_id`=#{departmentId},
+            `corporate_id`=#{corporateId},
+            `management_scope`=#{managementScope},
+            `post`=#{post},
+            `type`=#{type},
+            `regular_time`=#{regularTime},
+            `comment`=#{comment},
+            `update_time`=now(),
+            `update_by`='admin'
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" parameterType="integer" resultType="com.example.employee_management.entity.EmEmployee">
+        SELECT *
+        FROM `em_employee`
+        WHERE id = #{id}
+    </select>
+
+    <delete id="deleteById" parameterType="integer">
+        DELETE
+        FROM `em_employee`
+        WHERE id = #{id}
+    </delete>
+
+
 </mapper>
