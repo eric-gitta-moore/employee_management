@@ -25,7 +25,7 @@ public class EmCorporateInformationController {
      * @param id
      * @return
      */
-    @ApiOperation("根据Id获取企业运营状态")
+    @ApiOperation("根据Id获取企业运营状态，id：企业Id")
     @GetMapping("/operationsStatus")
     public Result getOperationsStatus(int id){
         String operationsStatus = service.getOperationsStatus(id);
@@ -37,7 +37,7 @@ public class EmCorporateInformationController {
     }
 
     @PutMapping("/changeOperationsStatus")
-    @ApiOperation("根据Id更改企业运营状态")
+    @ApiOperation("根据Id更改企业运营状态，id：企业Id，oldstate：当前状态")
     public Result changeOperationsStatus(int id,String oldState){
         try {
             service.changeOperationsStatus(id,oldState);
@@ -53,7 +53,7 @@ public class EmCorporateInformationController {
      * @return
      */
     @DeleteMapping("/cancelEnterprise")
-    @ApiOperation("注销企业，并删除所有相关的东西")
+    @ApiOperation("注销企业，并删除所有相关的东西，id：企业Id")
     public Result cancelEnterprise(int id){
         boolean succeed = service.cancelEnterprise(id);
         if(succeed){

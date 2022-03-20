@@ -16,7 +16,7 @@ import java.util.List;
 @Repository
 public interface EmCorporateInformationMapper extends BaseMapper<EmCorporateInformation> {
     /**
-     * 企业注销
+     * 企业注销，删除企业有关的所有信息
      * @param id
      * @return
      */
