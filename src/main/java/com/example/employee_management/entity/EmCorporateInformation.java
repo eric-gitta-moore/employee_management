@@ -63,7 +63,7 @@ public class EmCorporateInformation implements Serializable {
     /**
      * 企业logo
      */
-    private String logo;
+    private Integer logo;
 
     /**
      * 所属行业
