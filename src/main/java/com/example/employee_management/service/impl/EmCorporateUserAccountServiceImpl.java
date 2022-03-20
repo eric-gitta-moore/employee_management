@@ -34,9 +34,12 @@ public class EmCorporateUserAccountServiceImpl implements EmCorporateUserAccount
     @Override
     public String getStatus(int id) {
         List<EmCorporateUserAccount> emCorporateUserAccounts = mapper.selectList(new QueryWrapper<EmCorporateUserAccount>()
-                .select("operations_status")
+                .select("status")
                 .eq("id", id));
         updateOperationRecord(id);
+        if(emCorporateUserAccounts.size()==0){
+            return null;
+        }
         return emCorporateUserAccounts.get(0).getStatus();
     }
 
@@ -76,7 +79,6 @@ public class EmCorporateUserAccountServiceImpl implements EmCorporateUserAccount
     public IPage getUserAccount(int currentPage,String keyword,int size) {
         Page<EmCorporateUserAccount> page = new Page(currentPage,size);
         mapper.findByKeyword(page, keyword);
-        System.out.println(page.getTotal());
         return page;
     }
 

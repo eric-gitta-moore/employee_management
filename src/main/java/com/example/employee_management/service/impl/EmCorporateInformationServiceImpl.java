@@ -32,7 +32,9 @@ public class EmCorporateInformationServiceImpl implements EmCorporateInformation
         List<EmCorporateInformation> emCorporateInformation = mapper.selectList(new QueryWrapper<EmCorporateInformation>()
                 .select("operations_status")
                 .eq("id", id));
-        updateOperationRecord(id);
+        if(emCorporateInformation.size()==0){
+            return null;
+        }
         return emCorporateInformation.get(0).getOperationsStatus();
     }
 

@@ -4,6 +4,7 @@ import com.example.employee_management.common.utils.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -17,4 +18,12 @@ public class GlobalHandler {
         log.error("请求参数出错",e);
         return Result.fail(e.getMessage());
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = MissingServletRequestParameterException.class)
+    public Result handler(MissingServletRequestParameterException e){
+        log.error("参数不能为空",e);
+        return Result.fail(e.getMessage());
+    }
+
 }

@@ -7,6 +7,7 @@ import com.example.employee_management.service.EmCorporateInformationService;
 import com.example.employee_management.service.EmCorporateUserAccountService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,7 @@ public class EmCorporateUserAccountController {
 
     @ApiOperation("根据Id获取企业用户状态，id：企业用户id")
     @GetMapping("/getStatus")
-    public Result getOperationsStatus(int id){
+    public Result getOperationsStatus(@RequestParam(name = "id") int id){
         String operationsStatus = service.getStatus(id);
         if(operationsStatus!=null){
             return Result.success(operationsStatus);
@@ -37,7 +38,7 @@ public class EmCorporateUserAccountController {
 
     @ApiOperation("根据Id更改企业用户状态，id 企业用户id，oldState 当前的状态")
     @PutMapping("/changeStatus")
-    public Result changeOperationsStatus(int id,String oldState){
+    public Result changeOperationsStatus(@RequestParam(name = "id") int id,@RequestParam(name = "oldState") String oldState){
         try {
             service.changeStatus(id,oldState);
             return Result.success("改变状态成功");
@@ -48,7 +49,7 @@ public class EmCorporateUserAccountController {
 
     @DeleteMapping("/deleteAccount")
     @ApiOperation("删除企业用户，id：企业用户id")
-    public Result deleteAccount(int id){
+    public Result deleteAccount(@RequestParam(name = "id") int id){
         boolean isDeleted = service.deleteAccount(id);
         if(isDeleted){
             return Result.success("删除成功");
@@ -67,7 +68,7 @@ public class EmCorporateUserAccountController {
     @GetMapping("/getUserAccount")
     @ApiOperation("获取企业用户信息，keyword为空时搜索全部，key关键字对用户名和企业名进行搜索，currentPage：页码，keyword：关键字,size:每页的数量，默认值为5")
     public Result findByKeyword(@RequestParam(name = "currentPage",defaultValue = "1") Integer currentPage,
-                                @RequestParam(name = "keyword") String keyword,
+                                @RequestParam(name = "keyword",required = false) String keyword,
                                 @RequestParam(name = "size",defaultValue = "5")Integer size){
         IPage userAccount = service.getUserAccount(currentPage,keyword,size);
         return Result.success(userAccount);
