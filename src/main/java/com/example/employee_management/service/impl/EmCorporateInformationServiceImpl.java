@@ -71,10 +71,7 @@ public class EmCorporateInformationServiceImpl implements EmCorporateInformation
     public boolean cancelEnterprise(int id) {
         List<String> imgUrl = mapper.getImgUrl(id);
         FileUtil.deleteFile((String[]) imgUrl.toArray());
-        String logo = mapper.selectList(new QueryWrapper<EmCorporateInformation>().select("logo").eq("id",id)).get(0).getLogo();
-        FileUtil.deleteFile(logo);
         return mapper.cancelEnterprise(id);
-
     }
 
     /**
