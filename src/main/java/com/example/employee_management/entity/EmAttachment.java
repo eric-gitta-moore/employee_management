@@ -26,6 +26,11 @@ public class EmAttachment implements Serializable {
     private Integer id;
 
     /**
+     * 名称
+     */
+    private String name;
+
+    /**
      * 路径
      */
     private String path;

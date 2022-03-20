@@ -11,5 +11,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface EmAttachmentMapper extends BaseMapper<EmAttachment> {
-
+    @Override
+    int insert(EmAttachment entity);
 }
