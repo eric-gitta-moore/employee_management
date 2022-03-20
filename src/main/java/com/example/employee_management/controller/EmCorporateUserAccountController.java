@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
+import java.util.Map;
+
 /**
  * <p>
  * 企业用户账号管理 前端控制器
@@ -32,9 +34,14 @@ public class EmCorporateUserAccountController {
 
     @ApiOperation("根据Id更改企业用户状态，id 企业用户id，newState 要改变的状态")
     @PutMapping("/changeStatus")
-    public Result changeOperationsStatus(@RequestParam(name = "id") int id,@RequestParam(name = "newState") String newState){
+    public Result changeOperationsStatus(@RequestBody Map<String,String> map){
+        String id = map.get("id");
+        String newState = map.get("newState");
+        if(id==null || newState==null){
+            Result.fail("id或新状态不能为空");
+        }
         //过去改变状态结果
-        String result = service.changeStatus(id,newState);
+        String result = service.changeStatus(Integer.parseInt(map.get("id")), newState);
         if (result.equals("succeed")){
             return Result.success(result);
         }else {
@@ -42,10 +49,19 @@ public class EmCorporateUserAccountController {
         }
     }
 
+    /**
+     *  注销企业用户
+     * @param map id:企业用户id
+     * @return
+     */
     @DeleteMapping("/deleteAccount")
     @ApiOperation("注销企业用户，id：企业用户id")
-    public Result deleteAccount(@RequestParam(name = "id") int id){
-        boolean isDeleted = service.deleteAccount(id);
+    public Result deleteAccount(@RequestBody Map<String,String> map){
+        String id = map.get("id");
+        if(id==null){
+            Result.fail("id不能为空");
+        }
+        boolean isDeleted = service.deleteAccount(Integer.parseInt(id));
         if(isDeleted){
             return Result.success("注销成功");
         }else {
@@ -56,16 +72,24 @@ public class EmCorporateUserAccountController {
 
     /**
      * 获取企业用户信息，keyword为空时搜索全部
-     * @param currentPage
-     * @param keyword
+     * @param map 接收所有参数 currentPage：页码，keyword：关键字,size:每页的数量，默认值为5
      * @return
      */
     @GetMapping("/getUserAccount")
     @ApiOperation("获取企业用户信息，keyword为空时搜索全部，key关键字对用户名和企业名进行搜索，currentPage：页码，keyword：关键字,size:每页的数量，默认值为5")
-    public Result findByKeyword(@RequestParam(name = "currentPage",defaultValue = "1") Integer currentPage,
-                                @RequestParam(name = "keyword",required = false) String keyword,
-                                @RequestParam(name = "size",defaultValue = "5")Integer size){
-        IPage userAccount = service.getUserAccount(currentPage,keyword,size);
+    public Result findByKeyword(@RequestBody Map<String,String> map){
+        String currentPage = map.get("currentPage");
+        String keyword = map.get("keyword");
+        String pSize = map.get("size");
+        int page=1;
+        int size=5;
+        if(currentPage!=null){
+            page=Integer.parseInt(currentPage);
+        }
+        if (pSize!=null){
+            size=Integer.parseInt(pSize);
+        }
+        IPage userAccount = service.getUserAccount(page,keyword,size);
         return Result.success(userAccount);
     }
 
