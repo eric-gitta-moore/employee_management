@@ -4,6 +4,8 @@ package com.example.employee_management.controller;
 import com.example.employee_management.common.utils.Result;
 import com.example.employee_management.entity.EmDepartment;
 import com.example.employee_management.service.EmDepartmentService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/em-department")
+@Api(value = "EmDepartmentController",tags = {"部门增删改查API"})
 public class EmDepartmentController {
 
     @Autowired
@@ -24,15 +27,21 @@ public class EmDepartmentController {
 
     /**
      * 获取部门树状下拉表
-     *
      * @return
      */
+    @ApiOperation("获取部门树状下拉表")
     @GetMapping("/getTreeSelect")
     public Result getTreeSelect() {
         List<EmDepartment> allDepartment = departmentService.selectDeptList(1);
         return Result.success(departmentService.buildDeptTree(allDepartment));
     }
 
+    /**
+     * 添加部门
+     * @param department 部门信息
+     * @return
+     */
+    @ApiOperation("添加部门")
     @PutMapping("/addDepartment")
     public Result addDepartment(EmDepartment department) {
         Integer result = departmentService.addDepartment(department);
@@ -43,6 +52,12 @@ public class EmDepartmentController {
         }
     }
 
+    /**
+     * 编辑部门
+     * @param department 部门信息
+     * @return
+     */
+    @ApiOperation("编辑部门")
     @PutMapping("/editDepartment")
     public Result editDepartment(EmDepartment department) {
         Integer result = departmentService.editDepartment(department);
