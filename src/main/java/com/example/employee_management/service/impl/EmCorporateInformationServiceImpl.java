@@ -83,17 +83,13 @@ public class EmCorporateInformationServiceImpl implements EmCorporateInformation
     }
 
 
-public class EmCorporateInformationServiceImpl   implements EmCorporateInformationService {
-
-    @Autowired
-    EmCorporateInformationMapper emCorporateInformationMapper;
 
 /*更改企业信息
 * */
     public boolean updateEmCorporateInformation(EmCorporateInformation emCorporateInformation){
 
         try{
-            emCorporateInformationMapper.updateById(emCorporateInformation);
+            mapper.updateById(emCorporateInformation);
             return true;
         }catch(Exception exception){
             exception.printStackTrace();

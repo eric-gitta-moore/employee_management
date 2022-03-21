@@ -24,7 +24,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/em-corporate-user-account")
-@Api(value = "EmCorporateUserAccountController",tags = {"刘锦堂===>企业用户账号管理接口"})
+@Api(value = "EmCorporateUserAccountController",tags = {"企业用户账号管理接口"})
 public class EmCorporateUserAccountController {
 
     @Autowired

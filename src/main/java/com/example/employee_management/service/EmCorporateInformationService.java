@@ -1,5 +1,7 @@
 package com.example.employee_management.service;
 
+import com.example.employee_management.entity.EmCorporateInformation;
+
 /**
  * <p>
  * 企业信息管理 服务类

@@ -37,7 +37,6 @@ import java.time.LocalDateTime;
 @RestController
 @Api(value = "EmCorporateInformationController", tags = {"企业信息管理api"})
 @RequestMapping("/em-corporate-information")
-@Api(value = "EmCorporateInformationController",tags = {"刘锦堂===>{改变状态，注销企业}"})
 public class EmCorporateInformationController {
     @Autowired
     EmCorporateInformationService service;
