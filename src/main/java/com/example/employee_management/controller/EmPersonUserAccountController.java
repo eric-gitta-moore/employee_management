@@ -24,13 +24,13 @@ public class EmPersonUserAccountController{
     EmPersonUserAccountServiceImpl Service;
 
     @ApiOperation(value = "展示用户数据")
-    @GetMapping("/main")
+    @PostMapping("/main")
     public Result personUserAccount(){
         return Result.success(Service.select());
     }
 
 
-    @GetMapping("/enable")
+    @PutMapping("/enable")
     @ApiOperation(value = "启动用户")
     public Result enable(@RequestParam("id") int id){
         boolean enable = Service.updateStatus(id, "enable");
@@ -43,7 +43,7 @@ public class EmPersonUserAccountController{
     }
 
 
-    @GetMapping("/pause")
+    @PutMapping("/pause")
     @ApiOperation(value = "暂停用户")
     public Result pause(@RequestParam("id") int id){
         boolean pause = Service.updateStatus(id, "pause");
@@ -63,8 +63,8 @@ public class EmPersonUserAccountController{
         return Result.success("成功");
     }
 
-    @GetMapping("/search")
-    @ApiOperation(value = "查询用户,keywords，代表用户的名字或者id")
+    @PostMapping("/search")
+    @ApiOperation(value = "查询用户,keywords代表用户的姓名或者该用户编号尾部有效部分的数字")
     public Result search(@RequestParam("keywords") String keywords){
         EmPersonUserAccount search = Service.Search(keywords);
         return Result.success(search);
