@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * 个人用户账号 前端控制器
  * </p>
  */
-@Api(value = "用户信息的各种操作，以及暂停，注销，启动转态的改变")
+@Api(tags = "用户信息的各种操作，以及暂停，注销，启动转态的改变")
 @RestController
 @RequestMapping("/em-person-user-account")
 public class EmPersonUserAccountController{
@@ -24,7 +24,7 @@ public class EmPersonUserAccountController{
     EmPersonUserAccountServiceImpl Service;
 
     @ApiOperation(value = "郑前====》页面默认展示所有用户信息")
-    @PostMapping("/main")
+    @PostMapping("/userInformation")
     public Result personUserAccount(){
         return Result.success(Service.select());
     }
