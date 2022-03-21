@@ -1,16 +1,17 @@
 package com.example.employee_management.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 
 @Data
 @EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
 @Accessors(chain = true)
 @ApiModel("查询结果封装类")
 public class EmAttachmentAndEmCorporateInformation {

@@ -17,7 +17,7 @@
             attach5.path AS path5
 
         FROM
-            em_corporate_information AS corInfo
+                em_corporate_information AS corInfo
                 LEFT JOIN em_attachment AS attach1 ON corInfo.business_license = attach1.id
                 LEFT JOIN em_attachment AS attach2 ON corInfo.legal_entity_identity_card_img_positive = attach2.id
                 LEFT JOIN em_attachment AS attach3 ON corInfo.legal_entity_identity_card_img_rear = attach3.id
@@ -34,11 +34,6 @@
             *
         FROM
             em_corporate_information AS corInfo
-                LEFT JOIN em_attachment AS attach1 ON corInfo.business_license = attach1.id
-                LEFT JOIN em_attachment AS attach2 ON corInfo.legal_entity_identity_card_img_positive = attach2.id
-                LEFT JOIN em_attachment AS attach3 ON corInfo.legal_entity_identity_card_img_rear = attach3.id
-                LEFT JOIN em_attachment AS attach4 ON corInfo.contact_person_identity_card_img_positive = attach4.id
-                LEFT JOIN em_attachment AS attach5 ON corInfo.contact_person_identity_card_img_rear = attach5.id
         ORDER BY
             corInfo.create_time DESC
     </select>

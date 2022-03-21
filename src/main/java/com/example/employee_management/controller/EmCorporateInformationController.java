@@ -21,7 +21,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/em-corporate-information")
-@Api(value = "EmCorporateInformationController",tags = {"企业信息管理"})
+@Api(value = "EmCorporateInformationController",tags = {"企业信息管理接口"})
 public class EmCorporateInformationController {
     @Autowired
     EmCorporateInformationService service;
@@ -75,7 +75,7 @@ public class EmCorporateInformationController {
 
     @PostMapping(value = "/queryByCreatime")
     @ApiOperation("朱涵===>根据创建时间来查询并且降序排序")
-    public Result queryByCreatime(@RequestBody EmCorporateInformation emCorporateInformation, QueryPage queryPage){
+    public Result queryByCreatime(@RequestBody QueryPage queryPage){
         return  Result.success(service.queryByCreatimeService(queryPage));
     }
 
