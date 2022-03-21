@@ -12,11 +12,19 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 @Slf4j
-public class GlobalHandler {
+public class GlobalHandler{
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = BindException.class)
     public Result handler(BindException e){
         log.error("请求参数出错",e);
+        return Result.fail(e.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = RuntimeException.class)
+    public Result handler(RuntimeException e){
+        log.error("运行时出现异常",e);
         return Result.fail(e.getMessage());
     }
 

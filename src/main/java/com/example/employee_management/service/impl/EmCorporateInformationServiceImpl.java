@@ -1,18 +1,26 @@
 package com.example.employee_management.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.employee_management.common.utils.FileUtil;
+import com.example.employee_management.common.utils.QueryPage;
+import com.example.employee_management.entity.EmAttachmentAndEmCorporateInformation;
 import com.example.employee_management.entity.EmCorporateInformation;
 import com.example.employee_management.mapper.EmCorporateInformationMapper;
 import com.example.employee_management.service.EmCorporateInformationService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -82,6 +90,99 @@ public class EmCorporateInformationServiceImpl implements EmCorporateInformation
         mapper.update(admin,new UpdateWrapper<EmCorporateInformation>().eq("id",id));
     }
 
+
+
+
+    /**
+     * 对EmCorporateInformationMapper进行接口注入
+     */
+    @Autowired
+    EmCorporateInformationMapper emCorporateInformationMapper;
+
+    /**
+     * 对所有企业按照创建时间排序查询
+     * @param queryPage
+     * @return
+     */
+    @Override
+    public Page<EmCorporateInformation> queryByCreatimeService(QueryPage queryPage) {
+        Page<EmCorporateInformation> page = new Page<>(queryPage.getPage(), queryPage.getLimit());
+        Page<EmCorporateInformation> corInfos = emCorporateInformationMapper.sortByTime(page);
+        return corInfos;
+    }
+
+    /**
+     * 按照企业名称进行查询
+     * @param emCorporateInformation
+     * @param queryPage
+     * @return
+     */
+    @Override
+    public IPage<EmCorporateInformation> queryByNameService(EmCorporateInformation emCorporateInformation, QueryPage queryPage) {
+        IPage<EmCorporateInformation> page = new Page<>(queryPage.getPage(), queryPage.getLimit());
+        LambdaQueryWrapper<EmCorporateInformation> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.orderByDesc(EmCorporateInformation::getId);
+        queryWrapper.like(StringUtils.isNotEmpty(emCorporateInformation.getCorporateName())
+                                                ,EmCorporateInformation::getCorporateName
+                                                ,emCorporateInformation.getCorporateName());
+        IPage<EmCorporateInformation> selectPage = emCorporateInformationMapper.selectPage(page, queryWrapper);
+       return selectPage;
+    }
+
+    /**
+     * 查询所有未审核的企业
+     * @return
+     */
+    @Override
+    public List<EmAttachmentAndEmCorporateInformation> queryByStatusService() {
+        List<EmAttachmentAndEmCorporateInformation> listAll=new ArrayList<>();
+        Map<String,Object> map=new HashMap<>();
+        map.put("review_status","verified");
+        List<EmCorporateInformation> lists = emCorporateInformationMapper.selectByMap(map);
+        for (EmCorporateInformation information : lists) {
+           EmAttachmentAndEmCorporateInformation  allmsg = emCorporateInformationMapper.getAllMsg(information.getId());
+           listAll.add(allmsg);
+        }
+        return listAll;
+    }
+
+
+
+    /**
+     * 根据前端传来的企业id对某个未审核的企业进行查询信息
+     * @param id
+     * @return
+     */
+    @Override
+    public EmAttachmentAndEmCorporateInformation queryStatusByIdService(Integer id) {
+        EmAttachmentAndEmCorporateInformation allmsg = emCorporateInformationMapper.getAllMsg( id);
+        return allmsg;
+    }
+
+    /**
+     * 更改企业审核状态
+     * @param emAttachmentAndEmCorporateInformation
+     * @param status
+     * @return
+     */
+
+    @Override
+    public String updateCorInfoStatusService(EmAttachmentAndEmCorporateInformation emAttachmentAndEmCorporateInformation,Integer status) {
+
+        LambdaUpdateWrapper<EmCorporateInformation> queryWrapper = new LambdaUpdateWrapper<>();
+        String result=null;
+        queryWrapper.like(EmCorporateInformation::getId
+                         ,emAttachmentAndEmCorporateInformation.getId());
+        if (status==1){
+            queryWrapper.set(EmCorporateInformation::getReviewStatus,"pending_reward");
+            result="succed";
+        }else {
+            queryWrapper.set(EmCorporateInformation::getReviewStatus,"not_approved");
+            result="falid";
+        }
+
+        return result;
+    }
 
 
 /*更改企业信息

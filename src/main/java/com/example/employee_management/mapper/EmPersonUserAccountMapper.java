@@ -11,5 +11,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface EmPersonUserAccountMapper extends BaseMapper<EmPersonUserAccount> {
-
+    //修改用户状态
+    EmPersonUserAccount Search(String number);
 }

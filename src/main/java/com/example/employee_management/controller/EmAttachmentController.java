@@ -1,7 +1,7 @@
 package com.example.employee_management.controller;
 
 
-import ch.qos.logback.core.util.FileUtil;
+import com.example.employee_management.common.utils.FileUtil;
 import com.example.employee_management.common.utils.Result;
 import com.example.employee_management.entity.EmAttachment;
 import com.example.employee_management.entity.EmEmployee;
@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 import org.springframework.web.multipart.MultipartFile;
 
 /**

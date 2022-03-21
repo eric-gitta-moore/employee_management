@@ -1,4 +1,5 @@
-package com.example.employee_management.config;
+package com.example.employee_management.common.config;
+
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
@@ -13,8 +14,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @MapperScan("com.example.employee_management.service.*.mapper*")
 public class MybatisPlusConfig {
-
-
     @Bean
     public PaginationInterceptor paginationInterceptor() {
         PaginationInterceptor page = new PaginationInterceptor();
