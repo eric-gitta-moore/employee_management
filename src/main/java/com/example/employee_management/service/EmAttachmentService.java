@@ -9,5 +9,20 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  */
 public interface EmAttachmentService{
+    /**
+     *   修改编辑企业信息
+     */
+
+
+     boolean updateEmAttachment(EmAttachment emAttachment);
+
+
+
+    /**
+     *  文件存储
+     */
+
+      Integer saveFile(String path);
+
 
 }

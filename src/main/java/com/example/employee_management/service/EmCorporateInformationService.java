@@ -10,4 +10,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EmCorporateInformationService{
 
+
+/**
+ *         更改企业信息
+ */
+
+     boolean updateEmCorporateInformation(EmCorporateInformation emCorporateInformation);
+
+
+
 }

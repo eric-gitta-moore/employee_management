@@ -58,7 +58,7 @@ public class FileUtil {
  *   @return 文件路径数组
  */
     public static String[] pictureStorage(String route,MultipartFile[] file) throws IOException {
-        String[] strings = new String[5];
+        String[] strings=new String[10];
 
 
         for (int i = 0; i < file.length; i++) {
