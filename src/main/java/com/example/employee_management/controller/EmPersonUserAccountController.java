@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * 个人用户账号 前端控制器
  * </p>
  */
-@Api(value = "用户信息的各种操作和暂停，注销，启动的改变")
+@Api(tags = "用户信息的各种操作，以及暂停，注销，启动转态的改变")
 @RestController
 @RequestMapping("/em-person-user-account")
 public class EmPersonUserAccountController{
@@ -23,15 +23,15 @@ public class EmPersonUserAccountController{
     @Autowired
     EmPersonUserAccountServiceImpl Service;
 
-    @ApiOperation(value = "展示用户数据")
-    @GetMapping("/main")
+    @ApiOperation(value = "郑前====》页面默认展示所有用户信息")
+    @PostMapping("/userInformation")
     public Result personUserAccount(){
         return Result.success(Service.select());
     }
 
 
-    @GetMapping("/enable")
-    @ApiOperation(value = "启动用户")
+    @PutMapping("/enable")
+    @ApiOperation(value = "郑前====》输入id启动用户")
     public Result enable(@RequestParam("id") int id){
         boolean enable = Service.updateStatus(id, "enable");
         if(enable){
@@ -43,8 +43,8 @@ public class EmPersonUserAccountController{
     }
 
 
-    @GetMapping("/pause")
-    @ApiOperation(value = "暂停用户")
+    @PutMapping("/pause")
+    @ApiOperation(value = "郑前====》输入id暂停用户")
     public Result pause(@RequestParam("id") int id){
         boolean pause = Service.updateStatus(id, "pause");
         if(pause){
@@ -57,14 +57,14 @@ public class EmPersonUserAccountController{
 
 
     @DeleteMapping("/sing_out")
-    @ApiOperation(value = "注销用户")
+    @ApiOperation(value = "郑前====》输入id注销用户")
     public Result sing_out(@RequestParam("id") int id){
         Service.deleteById(id);
         return Result.success("成功");
     }
 
-    @GetMapping("/search")
-    @ApiOperation(value = "查询用户,keywords，代表用户的名字或者id")
+    @PostMapping("/search")
+    @ApiOperation(value = "郑前====》查询用户,keywords代表用户的姓名或者该用户编号尾部有效部分的数字")
     public Result search(@RequestParam("keywords") String keywords){
         EmPersonUserAccount search = Service.Search(keywords);
         return Result.success(search);
