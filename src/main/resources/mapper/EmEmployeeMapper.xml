@@ -2,6 +2,68 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.employee_management.mapper.EmEmployeeMapper">
 
+    <resultMap id="selectPageResult" type="com.example.employee_management.entity.EmEmployee">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="account" column="account"/>
+        <result property="phone" column="phone"/>
+        <result property="sex" column="sex"/>
+        <result property="job" column="job"/>
+        <result property="status" column="status"/>
+        <result property="entryTime" column="entry_time"/>
+        <result property="departureTime" column="departure_time"/>
+        <result property="avatar" column="avatar"/>
+        <result property="employeeNumber" column="employee_number"/>
+        <result property="departmentId" column="department_id"/>
+        <result property="corporateId" column="corporate_id"/>
+        <result property="managementScope" column="management_scope"/>
+        <result property="post" column="post"/>
+        <result property="type" column="type"/>
+        <result property="regularTime" column="regular_time"/>
+        <result property="comment" column="comment"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateBy" column="update_by"/>
+        <association property="avatarAttachment"
+                     javaType="com.example.employee_management.entity.EmAttachment"
+                     resultMap="avatarResult"/>
+    </resultMap>
+
+    <resultMap id="avatarResult" type="com.example.employee_management.entity.EmAttachment">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="path" column="path"/>
+        <result property="comment" column="comment"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateBy" column="update_by"/>
+    </resultMap>
+
+
+    <select id="selectPage" resultMap="selectPageResult">
+        SELECT *
+        FROM `em_employee` as e
+        left join em_attachment as a on a.id = e.avatar
+        WHERE 1 = 1
+        <if test="keyword != ''">
+            and e.name like concat("%",#{keyword},"%")
+        </if>
+        <if test="entryTimeStart != ''">
+            and date_format(e.entry_time,'%y%m%d') &gt;= date_format(#{entryTimeStart},'%y%m%d')
+        </if>
+        <if test="entryTimeEnd != ''">
+            and date_format(e.entry_time,'%y%m%d') &lt;= date_format(#{entryTimeEnd},'%y%m%d')
+        </if>
+        <if test="status != ''">
+            and e.status = #{status}
+        </if>
+        <if test="type != ''">
+            and e.type =#{type}
+        </if>
+    </select>
+
     <insert id="insert" parameterType="com.example.employee_management.entity.EmEmployee">
         INSERT INTO `em_employee`(`id`, `name`, `account`, `phone`, `sex`, `job`, `status`, `entry_time`,
                                   `departure_time`, `avatar`, `employee_number`, `department_id`, `corporate_id`,

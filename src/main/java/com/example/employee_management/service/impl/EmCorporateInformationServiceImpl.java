@@ -1,32 +1,13 @@
 package com.example.employee_management.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.employee_management.common.utils.QueryPage;
-import com.example.employee_management.controller.EmAttachmentController;
-import com.example.employee_management.entity.EmAttachmentAndEmCorporateInformation;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.example.employee_management.common.utils.FileUtil;
 import com.example.employee_management.entity.EmCorporateInformation;
 import com.example.employee_management.mapper.EmCorporateInformationMapper;
 import com.example.employee_management.service.EmCorporateInformationService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import javafx.scene.chart.PieChart;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -191,6 +172,21 @@ public class EmCorporateInformationServiceImpl implements EmCorporateInformation
         }
 
         return result;
+    }
+
+
+/*更改企业信息
+* */
+    public boolean updateEmCorporateInformation(EmCorporateInformation emCorporateInformation){
+
+        try{
+            mapper.updateById(emCorporateInformation);
+            return true;
+        }catch(Exception exception){
+            exception.printStackTrace();
+            return false;
+        }
+
     }
 
 

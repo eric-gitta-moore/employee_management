@@ -5,8 +5,12 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
+import jdk.nashorn.internal.objects.annotations.Constructor;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
@@ -14,6 +18,7 @@ import lombok.experimental.Accessors;
  * 附件表
  * </p>
  */
+
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
@@ -24,6 +29,7 @@ public class EmAttachment implements Serializable {
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+
 
     /**
      * 名称
@@ -59,6 +65,7 @@ public class EmAttachment implements Serializable {
      * 更新者
      */
     private String updateBy;
+
 
 
 }

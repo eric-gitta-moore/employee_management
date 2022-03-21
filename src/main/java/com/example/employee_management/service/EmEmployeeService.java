@@ -1,8 +1,13 @@
 package com.example.employee_management.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.employee_management.entity.EmEmployee;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.stereotype.Repository;
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * <p>
@@ -41,5 +46,7 @@ public interface EmEmployeeService {
      * @return 影响行数
      */
     int deleteById(int id);
+
+    IPage<EmEmployee> selectByParam(int currentPage, int pageSize, HashMap<String, String> where);
 
 }

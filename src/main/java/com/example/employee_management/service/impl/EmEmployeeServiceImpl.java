@@ -1,5 +1,7 @@
 package com.example.employee_management.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.employee_management.entity.EmAttachment;
 import com.example.employee_management.entity.EmEmployee;
 import com.example.employee_management.mapper.EmEmployeeMapper;
@@ -9,6 +11,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * <p>
@@ -52,7 +57,7 @@ public class EmEmployeeServiceImpl implements EmEmployeeService {
      */
     @Override
     public EmEmployee findOne(int id) {
-        EmEmployee employee=employeeMapper.selectById(id);
+        EmEmployee employee = employeeMapper.selectById(id);
         if (employee.getAvatar() != null) {
             EmAttachment avatarAttach = attachmentService.getAttachInfo(employee.getAvatar());
             employee.setAvatarAttachment(avatarAttach);
@@ -70,4 +75,28 @@ public class EmEmployeeServiceImpl implements EmEmployeeService {
     public int deleteById(int id) {
         return employeeMapper.deleteById(id);
     }
+
+    @Override
+    public IPage<EmEmployee> selectByParam(int currentPage, int pageSize, HashMap<String, String> where) {
+        String keyword = "", entryTimeStart = "", entryTimeEnd = "", status = "", type = "";
+        if (where.containsKey("keyword")) {
+            keyword = where.get("keyword");
+        }
+        if (where.containsKey("entryTimeStart")) {
+            entryTimeStart = where.get("entryTimeStart");
+        }
+        if (where.containsKey("entryTimeEnd")) {
+            entryTimeEnd = where.get("entryTimeEnd");
+        }
+        if (where.containsKey("status")) {
+            status = where.get("status");
+        }
+        if (where.containsKey("type")) {
+            type = where.get("type");
+        }
+        Page<?> page = new Page<>(currentPage, pageSize);
+        return employeeMapper.selectPage(page, keyword, entryTimeStart, entryTimeEnd, status, type);
+    }
+
+
 }

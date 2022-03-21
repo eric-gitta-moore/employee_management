@@ -27,8 +27,7 @@
     </select>
     <update id="updatePhoneById">
         UPDATE `em_corporate_user_account`
-        SET
-            `phone`=#{phone},
-        WHERE id=#{id}
+        SET `phone`=#{phone},
+            WHERE id = #{id}
     </update>
 </mapper>

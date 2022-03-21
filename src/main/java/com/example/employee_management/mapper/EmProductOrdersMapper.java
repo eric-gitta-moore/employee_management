@@ -2,6 +2,7 @@ package com.example.employee_management.mapper;
 
 import com.example.employee_management.entity.EmProductOrders;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**

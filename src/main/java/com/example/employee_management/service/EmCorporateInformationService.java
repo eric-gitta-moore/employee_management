@@ -1,14 +1,5 @@
 package com.example.employee_management.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.example.employee_management.common.utils.QueryPage;
-import com.example.employee_management.controller.EmAttachmentController;
-import com.example.employee_management.entity.EmAttachmentAndEmCorporateInformation;
-import com.example.employee_management.entity.EmCorporateInformation;
-import com.baomidou.mybatisplus.extension.service.IService;
-
-import java.util.List;
-
 /**
  * <p>
  * 企业信息管理 服务类
@@ -59,6 +50,15 @@ public interface EmCorporateInformationService{
     String changeOperationsStatus(int id, String state);
 
     boolean cancelEnterprise(int id);
+
+
+
+
+/**
+ *         更改企业信息
+ */
+
+     boolean updateEmCorporateInformation(EmCorporateInformation emCorporateInformation);
 
 
 
