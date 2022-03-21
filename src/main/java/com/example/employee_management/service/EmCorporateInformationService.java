@@ -69,6 +69,34 @@ public interface EmCorporateInformationService{
 
      boolean updateEmCorporateInformation(EmCorporateInformation emCorporateInformation);
 
+    /**
+     * 保存上传的企业信息
+     * @param emCorporateInformation
+     * @return
+     */
+
+    public Boolean saveEmCorporateInformation(EmCorporateInformation emCorporateInformation);
+
+    /**
+     * 将图片路径保存附件表并返回在附件表中的ID
+     * @param path
+     * @return
+     */
+    //public Integer savePicture(String path);
+
+    /**
+     * 按ID查询企业信息
+     * @param id
+     * @return
+     */
+    public EmCorporateInformation getEmCorporateInformationById(Integer id);
+
+    /**
+     * 查询数据库表中最后一条数据，并返回其ID
+     * @return
+     */
+    public Integer selectLast();
+
 
 
 }

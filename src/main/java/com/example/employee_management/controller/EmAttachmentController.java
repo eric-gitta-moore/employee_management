@@ -7,16 +7,16 @@ import com.example.employee_management.entity.EmAttachment;
 import com.example.employee_management.entity.EmEmployee;
 import com.example.employee_management.service.EmAttachmentService;
 import com.example.employee_management.service.EmEmployeeService;
-import com.example.employee_management.service.impl.EmAttachmentServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -30,9 +30,50 @@ public class EmAttachmentController {
     @Autowired
     EmAttachmentService attachmentService;
 
-    @Autowired
-    EmAttachmentServiceImpl emAttachmentService;
 
+
+    @Autowired
+    private EmAttachmentService emAttachmentService;
+
+    /**
+     * 文件保存接口
+     * @param files
+     * @return
+     */
+    @PostMapping("/save")
+    @ApiOperation("李超===>接受发送的文件存储到数据库，注意，发送文件的对象名必须为files,图片属性名一并上传，并且属性名对象名必须为pictureNames")
+    public Result saveFile(MultipartFile [] files,String [] pictureNames)
+    {
+        List<Integer> list = new ArrayList<Integer>();
+        LocalDateTime localDateTime = LocalDateTime.now();
+        int i = 0;
+        for (i = 0; i < files.length; i++)
+        {
+            try
+            {
+                String path = FileUtil.pictureStorage(files[i]);
+                if(!path.isEmpty())
+                {
+                    EmAttachment emAttachment = new EmAttachment(path, pictureNames[i],null, localDateTime, localDateTime, "admin", "admin");
+                    Integer id = emAttachmentService.savePicturePath(emAttachment);
+                    list.add(id);
+                }
+
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        if (!list.isEmpty())
+        {
+            return Result.success(200,"图片存放成功",list);
+        }
+        else
+        {
+            return Result.fail(400,"图片保存失败",null);
+        }
+    }
 
     /**
      *  xiaohenhyv  文件处理接口

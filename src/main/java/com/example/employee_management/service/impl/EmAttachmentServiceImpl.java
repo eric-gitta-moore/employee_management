@@ -1,23 +1,14 @@
 package com.example.employee_management.service.impl;
 
 import com.example.employee_management.common.utils.FileUtil;
-import com.example.employee_management.common.utils.Result;
 import com.example.employee_management.entity.EmAttachment;
-import com.example.employee_management.entity.EmEmployee;
-import com.example.employee_management.exception.GlobalHandler;
 import com.example.employee_management.mapper.EmAttachmentMapper;
 import com.example.employee_management.service.EmAttachmentService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.example.employee_management.service.EmEmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.HashMap;
-
 import java.time.LocalDateTime;
 
 /**
@@ -29,6 +20,9 @@ import java.time.LocalDateTime;
 public class EmAttachmentServiceImpl implements EmAttachmentService {
     @Autowired
     EmAttachmentMapper attachmentMapper;
+    @Autowired
+    EmAttachmentMapper emAttachmentMapper;
+
 
     /**
      * 上传头像
@@ -37,6 +31,27 @@ public class EmAttachmentServiceImpl implements EmAttachmentService {
      * @param file
      * @return
      */
+
+
+    /**
+     * 保存图片到附件库,将附件库的对象传过来
+     * @param path
+     * @return
+     */
+    @Override
+    public Integer savePicturePath(EmAttachment path) {
+        int insert = emAttachmentMapper.insert(path);
+        if(insert > 0)
+        {
+            Integer id = path.getId();
+            return id;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
     @Override
     public EmAttachment uploadAvatar(int employeeId, MultipartFile file) throws IOException {
         String filePath;
@@ -44,7 +59,7 @@ public class EmAttachmentServiceImpl implements EmAttachmentService {
         EmAttachment att = new EmAttachment();
         att.setName(file.getOriginalFilename());
         att.setPath(filePath);
-        int effectLine = attachmentMapper.insert(att);
+        int effectLine = emAttachmentMapper.insert(att);
         if (effectLine == 0) {
             //异常处理
         }
@@ -61,12 +76,11 @@ public class EmAttachmentServiceImpl implements EmAttachmentService {
      */
     @Override
     public EmAttachment getAttachInfo(int attachId) {
-        EmAttachment attachment = attachmentMapper.selectById(attachId);
+        EmAttachment attachment = emAttachmentMapper.selectById(attachId);
         attachment.setPath(FileUtil.getCatalogue() + attachment.getPath());
         return attachment;
     }
-    @Autowired
-    EmAttachmentMapper emAttachmentMapper;
+
 
     /**
      * 修改编辑企业信息

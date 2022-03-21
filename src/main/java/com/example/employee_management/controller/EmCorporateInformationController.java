@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +27,58 @@ public class EmCorporateInformationController {
     @Autowired
     EmCorporateInformationService service;
 
+
+
+    @Autowired
+    private EmCorporateInformationService emCorporateInformationService;
+
+
+    /**
+     * 保存企业信息
+     * @param emCorporateInformation
+     * @return
+     */
+    @ApiOperation("李超===>保存企业信息，OperationsStatus：默认enable，ReviewStatus：默认verified，TenantsNumber：默认JH-2021+id")
+    @PostMapping("/saveEmCorporateInformation")
+    public Result saveEmCorporateInformation(@RequestBody EmCorporateInformation emCorporateInformation)
+    {
+        //获取时间
+        LocalDateTime localDateTime = LocalDateTime.now();
+
+
+        try
+        {
+            emCorporateInformation.setCreateTime(localDateTime);
+            emCorporateInformation.setUpdateTime(localDateTime);
+            emCorporateInformation.setTimeEfficiencyStart(localDateTime);
+            emCorporateInformation.setTimeEfficiencyEnd(localDateTime.plusDays(365));
+            Integer id = emCorporateInformationService.selectLast();
+            //此数据必须唯一！！
+            emCorporateInformation.setTenantsNumber("JH-2021"+(++id));
+            emCorporateInformation.setOperationsStatus("enable");
+            emCorporateInformation.setReviewStatus("verified");
+            emCorporateInformation.setCreateBy("admin");
+            emCorporateInformation.setUpdateBy("admin");
+
+
+
+
+        }catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+        Boolean status = emCorporateInformationService.saveEmCorporateInformation(emCorporateInformation);
+
+        if(status)
+        {
+            return Result.success(200,"保存成功",emCorporateInformation);
+        }
+        else
+        {
+            return Result.fail(400,"保存失败,请重试！",null);
+        }
+    }
 
     /**
      *  改变企业运营状态
@@ -102,12 +155,15 @@ public class EmCorporateInformationController {
     @ApiOperation("朱涵===>进行审核")
     @PutMapping("/updateReviewStatus")
     public Result updateReviewStatus(@RequestBody EmAttachmentAndEmCorporateInformation emAttachmentAndEmCorporateInformation,
-                                     @RequestParam("status") Integer status){
-        String  result = service.updateCorInfoStatusService(emAttachmentAndEmCorporateInformation, status);
-        if (result.equals("succed")){
+                                     @RequestParam("status") Integer status) {
+        String result = service.updateCorInfoStatusService(emAttachmentAndEmCorporateInformation, status);
+        if (result.equals("succed")) {
             return Result.success(result);
-        }else {
+        } else {
             return Result.fail(result);
+        }
+    }
+
     @PutMapping("/saveCorporationEdit")
     @ApiOperation("肖恒宇===>接受企业信息编辑页面，修改到数据库")
     public Result saveCorporationEdit(@RequestBody EmCorporateInformation emCorporateInformation){

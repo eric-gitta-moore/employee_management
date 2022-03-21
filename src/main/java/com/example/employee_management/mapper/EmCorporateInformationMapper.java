@@ -37,4 +37,10 @@ public interface EmCorporateInformationMapper extends BaseMapper<EmCorporateInfo
      * @return
      */
     List<String> getImgUrl(int id);
+
+    /**
+     * 查询数据库表中最后一条数据
+     * @return
+     */
+    public EmCorporateInformation selectLast();
 }
