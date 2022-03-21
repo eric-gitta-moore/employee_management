@@ -32,7 +32,7 @@ public class EmCorporateUserAccountController {
 
 
 
-    @ApiOperation("根据Id更改企业用户状态，id 企业用户id，newState 要改变的状态")
+    @ApiOperation("刘锦堂===>根据Id更改企业用户状态，id 企业用户id，newState 要改变的状态")
     @PutMapping("/changeStatus")
     public Result changeOperationsStatus(@RequestBody Map<String,String> map){
         String id = map.get("id");
@@ -55,7 +55,7 @@ public class EmCorporateUserAccountController {
      * @return
      */
     @DeleteMapping("/deleteAccount")
-    @ApiOperation("注销企业用户，id：企业用户id")
+    @ApiOperation("刘锦堂===>注销企业用户，id：企业用户id")
     public Result deleteAccount(@RequestBody Map<String,String> map){
         String id = map.get("id");
         if(id==null){
@@ -76,7 +76,7 @@ public class EmCorporateUserAccountController {
      * @return
      */
     @PostMapping("/getUserAccount")
-    @ApiOperation("获取企业用户信息，keyword为空时搜索全部，key关键字对用户名和企业名进行搜索，currentPage：页码，keyword：关键字,size:每页的数量，默认值为5")
+    @ApiOperation("刘锦堂===>获取企业用户信息，keyword为空时搜索全部，key关键字对用户名和企业名进行搜索，currentPage：页码，keyword：关键字,size:每页的数量，默认值为5")
     public Result findByKeyword(@RequestBody Map<String,String> map){
         String currentPage = map.get("currentPage");
         String keyword = map.get("keyword");

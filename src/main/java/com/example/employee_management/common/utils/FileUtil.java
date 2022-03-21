@@ -20,8 +20,7 @@ public class FileUtil {
     }
 
     /**
-     * 存放在static下的自定义的文件夹中
-     *
+     * 存放图片，返回图片地址
      * @param route
      * @param file
      * @return 文件路径
@@ -69,7 +68,7 @@ public class FileUtil {
     }
 
     /**
-     * 存放在static下的自定义的文件夹中
+     *
      *
      * @param file
      * @return 文件路径数组

@@ -29,7 +29,7 @@ public class EmCorporateInformationController {
      * @return
      */
     @PutMapping("/changeOperationsStatus")
-    @ApiOperation("根据Id更改企业运营状态，id：企业Id，newState：要改变为什么状态")
+    @ApiOperation("刘锦堂===>根据Id更改企业运营状态，id：企业Id，newState：要改变为什么状态")
     public Result changeOperationsStatus(@RequestBody Map<String,String> map){
         String id = map.get("id");
         String newState = map.get("newState");
@@ -54,7 +54,7 @@ public class EmCorporateInformationController {
      * @return
      */
     @DeleteMapping("/cancelEnterprise")
-    @ApiOperation("注销企业，并删除所有相关的东西，id：企业Id")
+    @ApiOperation("刘锦堂===>注销企业，并删除所有相关的东西，id：企业Id")
     public Result cancelEnterprise(@RequestBody Map<String,String> map){
         String id = map.get("id");
         if(id==null){
