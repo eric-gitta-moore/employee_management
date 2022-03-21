@@ -9,5 +9,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  */
 public interface EmPersonUserAccountMapper extends BaseMapper<EmPersonUserAccount> {
-
+    //修改用户状态
+    EmPersonUserAccount Search(String number);
 }

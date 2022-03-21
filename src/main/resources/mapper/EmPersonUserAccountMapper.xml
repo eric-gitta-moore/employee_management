@@ -2,4 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.employee_management.mapper.EmPersonUserAccountMapper">
 
+    
+    <resultMap id="personUserAccount" type="com.example.employee_management.entity.EmPersonUserAccount">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="phone" property="phone"></result>
+        <result column="corporate_user_number" property="corporateUserNumber"></result>
+        <result column="status" property="status"></result>
+        <result column="type" property="type"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="update_time" property="updateTime"></result>
+        <result column="create_by" property="createBy"></result>
+        <result column="update_by" property="updateBy"></result>
+    </resultMap>
+
+    <select id="Search" resultMap="personUserAccount">
+        select *from em_person_user_account where corporate_user_number like concat('%','${arg0}') or name='${arg0}';
+    </select>
 </mapper>
