@@ -22,7 +22,7 @@ import java.util.HashMap;
  */
 @RestController
 @RequestMapping("/em-employee")
-@Api(value = "EmEmployeeController", tags = {"员工管理API"})
+@Api(value = "EmEmployeeController", tags = {"陈柯雨===>员工管理"})
 public class EmEmployeeController {
     @Autowired
     private EmEmployeeService employeeService;
@@ -68,6 +68,7 @@ public class EmEmployeeController {
      * @param employee 员工信息
      * @return
      */
+    @ApiOperation("编辑员工")
     @PutMapping("/edit")
     public Result edit(EmEmployee employee) {
         return employeeService.editEmployee(employee) > 0 ? Result.success("修改成功") : Result.fail("修改失败");
@@ -79,6 +80,7 @@ public class EmEmployeeController {
      * @param id 员工id
      * @return
      */
+    @ApiOperation("删除员工")
     @DeleteMapping("/delete")
     public Result delete(int id) throws MissingRequestValueException {
         EmEmployee employee = employeeService.findOne(id);
@@ -94,6 +96,7 @@ public class EmEmployeeController {
      * @param employee 员工信息
      * @return
      */
+    @ApiOperation("添加一个员工")
     @PutMapping("/add")
     public Result add(EmEmployee employee) {
         return employeeService.addEmployee(employee) > 0 ? Result.success("修改成功") : Result.fail("修改失败");
@@ -104,6 +107,7 @@ public class EmEmployeeController {
      *
      * @return
      */
+    @ApiOperation("获取员工类型")
     @GetMapping("/getEmployeeTypes")
     public Result getEmployeeTypes() {
         HashMap<String, String> types = new HashMap<>();
@@ -120,6 +124,7 @@ public class EmEmployeeController {
      *
      * @return
      */
+    @ApiOperation("获取员工岗位")
     @GetMapping("/getEmployeePosts")
     public Result getEmployeePosts() {
         HashMap<String, String> types = new HashMap<>();
@@ -140,6 +145,7 @@ public class EmEmployeeController {
      *
      * @return
      */
+    @ApiOperation("获取员工职位")
     @GetMapping("/getEmployeeJobs")
     public Result getEmployeeJobs() {
         HashMap<String, String> types = new HashMap<>();
@@ -164,6 +170,7 @@ public class EmEmployeeController {
      *
      * @return
      */
+    @ApiOperation("获取员工类型")
     @GetMapping("/getEmployeeStatuses")
     public Result getEmployeeStatuses() {
         HashMap<String, String> types = new HashMap<>();
