@@ -2,4 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.employee_management.mapper.EmCorporateInformationMapper">
 
+    <delete id="cancelEnterprise">
+        delete information,account,attachment
+        from em_corporate_information as information
+        left join em_corporate_user_account as account
+        on information.id = account.corporate_id
+        left join em_attachment as attachment
+        on information.business_license = attachment.id
+        or information.contact_person_identity_card_img_rear = attachment.id
+        or information.contact_person_identity_card_img_positive = attachment.id
+        or information.legal_entity_identity_card_img_rear = attachment.id
+        or information.legal_entity_identity_card_img_positive = attachment.id
+        where information.id = #{id}
+    </delete>
+    <select id="getImgUrl" resultType="java.lang.String">
+        select attachment.path from em_corporate_information information
+        left join em_attachment attachment
+        on information.business_license = attachment.id
+        or information.contact_person_identity_card_img_rear = attachment.id
+        or information.contact_person_identity_card_img_positive = attachment.id
+        or information.legal_entity_identity_card_img_rear = attachment.id
+        or information.legal_entity_identity_card_img_positive = attachment.id
+        where information.id = #{id}
+    </select>
 </mapper>
