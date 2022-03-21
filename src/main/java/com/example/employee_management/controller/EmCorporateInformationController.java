@@ -58,7 +58,7 @@ public class EmCorporateInformationController {
      * @return
      */
     @DeleteMapping("/cancelEnterprise")
-    @ApiOperation("注销企业，并删除所有相关的东西，id：企业Id")
+    @ApiOperation("刘锦堂===>注销企业，并删除所有相关的东西，id：企业Id")
     public Result cancelEnterprise(@RequestBody Map<String,String> map){
         String id = map.get("id");
         if(id==null){
