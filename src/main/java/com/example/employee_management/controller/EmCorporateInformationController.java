@@ -21,7 +21,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/em-corporate-information")
-@Api(value = "EmCorporateInformationController",tags = {"刘锦堂===>{改变状态，注销企业}"})
+@Api(value = "EmCorporateInformationController",tags = {"企业信息管理"})
 public class EmCorporateInformationController {
     @Autowired
     EmCorporateInformationService service;
