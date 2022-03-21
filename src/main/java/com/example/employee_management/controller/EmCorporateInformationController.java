@@ -76,26 +76,26 @@ public class EmCorporateInformationController {
     @PostMapping(value = "/queryByCreatime")
     @ApiOperation("朱涵===>根据创建时间来查询并且降序排序")
     public Result queryByCreatime(@RequestBody EmCorporateInformation emCorporateInformation, QueryPage queryPage){
-        return  Result.success(emAttachmentControllerService.queryByCreatimeService(queryPage));
+        return  Result.success(service.queryByCreatimeService(queryPage));
     }
 
     @PostMapping(value = "/queryByName")
     @ApiOperation("朱涵===>根据企业名称查询企业信息")
     public Result queryByName(@RequestBody EmCorporateInformation emCorporateInformation, QueryPage queryPage){
-        return  Result.success(emAttachmentControllerService.queryByNameService(emCorporateInformation,queryPage));
+        return  Result.success(service.queryByNameService(emCorporateInformation,queryPage));
     }
 
     @ApiOperation("朱涵===>根据企业审核的状态字段查询所有未审核的企业")
     @GetMapping(value = "/queryByStatus")
     public Result queryByStatus(){
-        List<EmAttachmentAndEmCorporateInformation> listAll = emAttachmentControllerService.queryByStatusService();
+        List<EmAttachmentAndEmCorporateInformation> listAll = service.queryByStatusService();
         return Result.success(listAll);
     }
 
     @ApiOperation("朱涵===>查询勾选状态的审核信息")
     @GetMapping ("/queryStatusById/{id}")
     public Result queryStatusById(@PathVariable Integer id){
-        EmAttachmentAndEmCorporateInformation allmsg = emAttachmentControllerService.queryStatusByIdService(id);
+        EmAttachmentAndEmCorporateInformation allmsg = service.queryStatusByIdService(id);
         return Result.success(allmsg);
     }
 
@@ -103,7 +103,7 @@ public class EmCorporateInformationController {
     @PutMapping("/updateReviewStatus")
     public Result updateReviewStatus(@RequestBody EmAttachmentAndEmCorporateInformation emAttachmentAndEmCorporateInformation,
                                      @RequestParam("status") Integer status){
-        String  result = emAttachmentControllerService.updateCorInfoStatusService(emAttachmentAndEmCorporateInformation, status);
+        String  result = service.updateCorInfoStatusService(emAttachmentAndEmCorporateInformation, status);
         if (result.equals("succed")){
             return Result.success(result);
         }else {

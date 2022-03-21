@@ -28,4 +28,8 @@ public interface EmAttachmentService {
      * @return
      */
     EmAttachment getAttachInfo(int attachId);
+
+    boolean updateEmAttachment(EmAttachment emAttachment);
+
+    Integer saveFile(String path);
 }

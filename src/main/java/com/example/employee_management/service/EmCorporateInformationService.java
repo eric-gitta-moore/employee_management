@@ -1,5 +1,12 @@
 package com.example.employee_management.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.example.employee_management.common.utils.QueryPage;
+import com.example.employee_management.entity.EmAttachmentAndEmCorporateInformation;
+import com.example.employee_management.entity.EmCorporateInformation;
+
+import java.util.List;
+
 /**
  * <p>
  * 企业信息管理 服务类
@@ -27,7 +34,7 @@ public interface EmCorporateInformationService{
      * 查询所有未审核的企业
      * @return
      */
-    List<EmAttachmentAndEmCorporateInformation>  queryByStatusService();
+    List<EmAttachmentAndEmCorporateInformation> queryByStatusService();
 
     /**
      * 根据前端传来的id对某个企业进行审核

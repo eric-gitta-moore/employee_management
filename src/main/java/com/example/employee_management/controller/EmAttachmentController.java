@@ -1,11 +1,15 @@
 package com.example.employee_management.controller;
 
 
+import com.example.employee_management.common.utils.FileUtil;
 import com.example.employee_management.common.utils.Result;
 import com.example.employee_management.entity.EmAttachment;
 import com.example.employee_management.entity.EmEmployee;
 import com.example.employee_management.service.EmAttachmentService;
 import com.example.employee_management.service.EmEmployeeService;
+import com.example.employee_management.service.impl.EmAttachmentServiceImpl;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;

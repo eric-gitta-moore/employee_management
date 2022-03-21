@@ -1,7 +1,10 @@
 package com.example.employee_management.mapper;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.employee_management.entity.EmAttachmentAndEmCorporateInformation;
 import com.example.employee_management.entity.EmCorporateInformation;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
