@@ -1,14 +1,20 @@
 package com.example.employee_management.common.utils;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
+@ApiModel("结果集对象")
 public class Result {
     //状态码
+   @ApiModelProperty("响应状态码")
     private int code;
     //消息
+    @ApiModelProperty("响应消息")
     private String message;
     //返回获取的数据
+    @ApiModelProperty("响应回的数据")
     private Object data;
 
     protected Result(int code, String message, Object data) {

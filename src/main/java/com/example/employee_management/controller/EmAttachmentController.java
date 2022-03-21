@@ -18,9 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import org.springframework.web.multipart.MultipartFile;
-
 /**
  * <p>
  * 附件表 前端控制器
@@ -43,7 +40,7 @@ public class EmAttachmentController {
      */
 
       @PostMapping("/fileReserve")
-      @ApiOperation("接受发送的文件存储到数据库")
+      @ApiOperation("肖恒宇===>接受发送的文件存储到数据库")
       public Result fileReserve(MultipartFile[] file)   {
                Integer[] integers=new Integer[4];
           try{

@@ -5,8 +5,13 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
@@ -17,7 +22,10 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+@AllArgsConstructor
+@NoArgsConstructor
 @TableName("em_corporate_information")
+@ApiModel("企业信息管理类")
 public class EmCorporateInformation implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,6 +36,7 @@ public class EmCorporateInformation implements Serializable {
     /**
      * 实体租户名称（企业名称）（企业全称）
      */
+    @ApiModelProperty("企业名称")
     private String corporateName;
 
     /**
@@ -48,6 +57,7 @@ public class EmCorporateInformation implements Serializable {
     /**
      * 审核状态 
      */
+    @ApiModelProperty("审核状态")
     private String reviewStatus;
 
     /**
@@ -113,7 +123,7 @@ public class EmCorporateInformation implements Serializable {
     /**
     * 企业联系人身份证号
     */
-    private Integer contactPersonIdentityCard;
+    private String contactPersonIdentityCard;
 
     /**
      * 企业联系人身份证号，正面（国徽），图片
@@ -128,6 +138,7 @@ public class EmCorporateInformation implements Serializable {
     /**
      * 创建时间
      */
+    @ApiModelProperty("创建时间")
     private LocalDateTime createTime;
 
     /**

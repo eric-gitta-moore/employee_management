@@ -27,7 +27,7 @@ public class EmProductOrdersController {
      *  修改开通状态
      *  @param type 说明是开通还是停止   id  产品id
      */
-    @ApiOperation("  修改开通状态  type 说明是开通还是停止(stop表示停用 begin表示开通)    id  产品id")
+    @ApiOperation(" 肖恒宇===> 修改开通状态  type 说明是开通还是停止(stop表示停用 begin表示开通)    id  产品id")
     @PutMapping("/updateSubscriptionStatus/{id}/{type}")
     public Result updateSubscriptionStatus(@PathVariable("id") Integer id,@PathVariable("type") String type) {
         try {

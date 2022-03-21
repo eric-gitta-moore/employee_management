@@ -1,33 +1,18 @@
 package com.example.employee_management.controller;
 
 
-import com.example.employee_management.common.utils.FileUtil;
+import com.example.employee_management.common.utils.QueryPage;
 import com.example.employee_management.common.utils.Result;
-import com.example.employee_management.entity.EmAttachment;
+import com.example.employee_management.entity.EmAttachmentAndEmCorporateInformation;
 import com.example.employee_management.entity.EmCorporateInformation;
-import com.example.employee_management.entity.EmProductReview;
-import com.example.employee_management.mapper.EmCorporateInformationMapper;
-import com.example.employee_management.service.EmAttachmentService;
-import com.example.employee_management.service.impl.EmAttachmentServiceImpl;
-import com.example.employee_management.service.impl.EmCorporateInformationServiceImpl;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
-import org.springframework.web.bind.annotation.*;
-import com.example.employee_management.common.utils.Result;
 import com.example.employee_management.service.EmCorporateInformationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -35,8 +20,8 @@ import java.time.LocalDateTime;
  * </p>
  */
 @RestController
-@Api(value = "EmCorporateInformationController", tags = {"企业信息管理api"})
 @RequestMapping("/em-corporate-information")
+@Api(value = "EmCorporateInformationController",tags = {"企业信息管理接口"})
 public class EmCorporateInformationController {
     @Autowired
     EmCorporateInformationService service;
@@ -88,18 +73,43 @@ public class EmCorporateInformationController {
     }
 
 
-    @Autowired
-    EmCorporateInformationServiceImpl emCorporateInformationService;
+    @PostMapping(value = "/queryByCreatime")
+    @ApiOperation("朱涵===>根据创建时间来查询并且降序排序")
+    public Result queryByCreatime(@RequestBody QueryPage queryPage){
+        return  Result.success(service.queryByCreatimeService(queryPage));
+    }
 
+    @PostMapping(value = "/queryByName")
+    @ApiOperation("朱涵===>根据企业名称查询企业信息")
+    public Result queryByName(@RequestBody EmCorporateInformation emCorporateInformation, QueryPage queryPage){
+        return  Result.success(service.queryByNameService(emCorporateInformation,queryPage));
+    }
 
+    @ApiOperation("朱涵===>根据企业审核的状态字段查询所有未审核的企业")
+    @GetMapping(value = "/queryByStatus")
+    public Result queryByStatus(){
+        List<EmAttachmentAndEmCorporateInformation> listAll = service.queryByStatusService();
+        return Result.success(listAll);
+    }
 
-/**
-     * 编辑页面数据处理 存储
- * @param emCorporateInformation    企业信息对象
-     */
+    @ApiOperation("朱涵===>查询勾选状态的审核信息")
+    @GetMapping ("/queryStatusById/{id}")
+    public Result queryStatusById(@PathVariable Integer id){
+        EmAttachmentAndEmCorporateInformation allmsg = service.queryStatusByIdService(id);
+        return Result.success(allmsg);
+    }
 
+    @ApiOperation("朱涵===>进行审核")
+    @PutMapping("/updateReviewStatus")
+    public Result updateReviewStatus(@RequestBody EmAttachmentAndEmCorporateInformation emAttachmentAndEmCorporateInformation,
+                                     @RequestParam("status") Integer status){
+        String  result = service.updateCorInfoStatusService(emAttachmentAndEmCorporateInformation, status);
+        if (result.equals("succed")){
+            return Result.success(result);
+        }else {
+            return Result.fail(result);
     @PutMapping("/saveCorporationEdit")
-    @ApiOperation("接受企业信息编辑页面，修改到数据库")
+    @ApiOperation("肖恒宇===>接受企业信息编辑页面，修改到数据库")
     public Result saveCorporationEdit(@RequestBody EmCorporateInformation emCorporateInformation){
         try{
             emCorporateInformationService.updateEmCorporateInformation(emCorporateInformation);
@@ -109,7 +119,6 @@ public class EmCorporateInformationController {
             return Result.fail("操作失败>_< 服务器异常");
         }
     }
-
 
 
 }
