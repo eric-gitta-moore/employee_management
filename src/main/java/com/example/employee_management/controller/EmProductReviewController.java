@@ -35,7 +35,7 @@ public class EmProductReviewController {
      *
      * @param emProductReview 审核提交产品的信息对象 对象内容除开通理由之外 还需携带产品id    文件的id字符串
      */
-    @ApiOperation("存储提交审核时的提交的产品信息")
+    @ApiOperation("肖恒宇===>存储提交审核时的提交的产品信息")
     @PostMapping("/saveProductCheckInformation")
     public Result saveProductCheckInformation(@RequestBody EmProductReview emProductReview){
         try{
@@ -62,7 +62,7 @@ public class EmProductReviewController {
      * @param  id 在展示的产品的id
      * @return  result 包含开通/停用理由 以及展示的照片的文件路径
      */
-    @ApiOperation("提供正在审核中的产品信息 包含开通/停用理由 以及展示的照片的文件路径  id 在展示的产品的id")
+    @ApiOperation("肖恒宇===>提供正在审核中的产品信息 包含开通/停用理由 以及展示的照片的文件路径  id 在展示的产品的id")
     @GetMapping("/provideProductionInformation/{id}")
     public Result provideProductionInformation( @PathVariable("id") Integer id){
         try{

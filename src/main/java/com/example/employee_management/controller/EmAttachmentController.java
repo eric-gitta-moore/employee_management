@@ -1,11 +1,15 @@
 package com.example.employee_management.controller;
 
 
+import ch.qos.logback.core.util.FileUtil;
 import com.example.employee_management.common.utils.Result;
 import com.example.employee_management.entity.EmAttachment;
 import com.example.employee_management.entity.EmEmployee;
 import com.example.employee_management.service.EmAttachmentService;
 import com.example.employee_management.service.EmEmployeeService;
+import com.example.employee_management.service.impl.EmAttachmentServiceImpl;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -39,7 +43,7 @@ public class EmAttachmentController {
      */
 
       @PostMapping("/fileReserve")
-      @ApiOperation("接受发送的文件存储到数据库")
+      @ApiOperation("肖恒宇===>接受发送的文件存储到数据库")
       public Result fileReserve(MultipartFile[] file)   {
                Integer[] integers=new Integer[4];
           try{
