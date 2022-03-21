@@ -1,7 +1,6 @@
 package com.example.employee_management.service;
 
 import com.example.employee_management.entity.EmCorporateInformation;
-import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
@@ -9,5 +8,20 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  */
 public interface EmCorporateInformationService{
+
+    String changeOperationsStatus(int id, String state);
+
+    boolean cancelEnterprise(int id);
+
+
+
+
+/**
+ *         更改企业信息
+ */
+
+     boolean updateEmCorporateInformation(EmCorporateInformation emCorporateInformation);
+
+
 
 }

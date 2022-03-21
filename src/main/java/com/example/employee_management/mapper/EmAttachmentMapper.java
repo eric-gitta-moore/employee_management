@@ -2,12 +2,19 @@ package com.example.employee_management.mapper;
 
 import com.example.employee_management.entity.EmAttachment;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * <p>
  * 附件表 Mapper 接口
  * </p>
  */
+@Mapper
+@Repository
 public interface EmAttachmentMapper extends BaseMapper<EmAttachment> {
 
+
+    @Override
+    int insert(EmAttachment entity);
 }

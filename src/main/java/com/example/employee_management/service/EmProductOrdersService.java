@@ -10,4 +10,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EmProductOrdersService{
 
+    /**
+     *修改开通状态
+     */
+    boolean updateSubscriptionStatus(Integer id,String type);
+
 }

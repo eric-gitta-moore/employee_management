@@ -2,4 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.employee_management.mapper.EmCorporateUserAccountMapper">
 
+    <resultMap id="userAccountMap" type="com.example.employee_management.entity.EmCorporateUserAccount">
+        <id column="id" property="id"></id>
+        <result column="account" property="account"/>
+        <result column="phone" property="phone"/>
+        <result column="corporate_user_number" property="corporateUserNumber"/>
+        <result column="status" property="status"/>
+        <result column="type" property="type"/>
+        <result column="name" property="name"/>
+        <collection property="emCorporateInformation"
+                    ofType="com.example.employee_management.entity.EmCorporateInformation">
+            <result column="id" property="id"/>
+            <result column="corporate_name" property="corporateName"/>
+        </collection>
+    </resultMap>
+    <select id="findByKeyword" resultMap="userAccountMap">
+        select * from em_corporate_user_account account
+        left join em_corporate_information information
+        on account.corporate_id = information.id
+        <if test="keyword!=null">
+            where account.name like '%${keyword}%'
+            or information.corporate_name like '%${keyword}%'
+        </if>
+    </select>
+    <update id="updatePhoneById">
+        UPDATE `em_corporate_user_account`
+        SET `phone`=#{phone},
+            WHERE id = #{id}
+    </update>
 </mapper>
