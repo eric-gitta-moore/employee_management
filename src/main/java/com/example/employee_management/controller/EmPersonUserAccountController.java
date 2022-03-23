@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * 个人用户账号 前端控制器
  * </p>
  */
-@Api(tags = "用户信息的各种操作，以及暂停，注销，启动转态的改变")
+@Api(tags = "用户信息的各种操作，以及暂停，注销，启动状态的改变")
 @RestController
 @RequestMapping("/em-person-user-account")
 public class EmPersonUserAccountController{
@@ -30,34 +30,19 @@ public class EmPersonUserAccountController{
     }
 
 
-    @PutMapping("/enable")
-    @ApiOperation(value = "郑前====》输入id启动用户")
-    public Result enable(@RequestParam("id") int id){
-        boolean enable = Service.updateStatus(id, "enable");
-        if(enable){
+    @PutMapping("/Change")
+    @ApiOperation(value = "郑前====》通过id和新的状态改变用户状态信息")
+    public Result Change(@RequestParam("id") int id,@RequestParam("status") String status) {
+        boolean enable = Service.updateStatus(id, status);
+        if (enable) {
             return Result.success("成功");
-        }
-        else {
+        } else {
             return Result.fail("失败");
         }
     }
 
-
-    @PutMapping("/pause")
-    @ApiOperation(value = "郑前====》输入id暂停用户")
-    public Result pause(@RequestParam("id") int id){
-        boolean pause = Service.updateStatus(id, "pause");
-        if(pause){
-            return Result.success("成功");
-        }
-        else {
-          return Result.fail("失败");
-        }
-    }
-
-
     @DeleteMapping("/sing_out")
-    @ApiOperation(value = "郑前====》输入id注销用户")
+    @ApiOperation(value = "郑前====》通过id注销用户")
     public Result sing_out(@RequestParam("id") int id){
         Service.deleteById(id);
         return Result.success("成功");
