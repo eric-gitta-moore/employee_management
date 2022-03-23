@@ -19,7 +19,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/em-department")
-@Api(value = "EmDepartmentController", tags = {"部门增删改查API"})
+@Api(value = "EmDepartmentController", tags = {"部门操作"})
 public class EmDepartmentController {
 
     @Autowired

@@ -62,4 +62,8 @@
         or information.legal_entity_identity_card_img_positive = attachment.id
         where information.id = #{id}
     </select>
+    <select id="selectLast" resultType="com.example.employee_management.entity.EmCorporateInformation">
+        SELECT * FROM em_corporate_information ORDER BY id DESC LIMIT 1;
+
+    </select>
 </mapper>

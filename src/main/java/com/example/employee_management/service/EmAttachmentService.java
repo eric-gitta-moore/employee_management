@@ -32,4 +32,12 @@ public interface EmAttachmentService {
     boolean updateEmAttachment(EmAttachment emAttachment);
 
     Integer saveFile(String path);
+
+    /**
+     * 将图片路径保存进附件表，并返回其在附件表中的ID
+     * @param path
+     * @return
+     */
+    public Integer savePicturePath(EmAttachment path);
+
 }

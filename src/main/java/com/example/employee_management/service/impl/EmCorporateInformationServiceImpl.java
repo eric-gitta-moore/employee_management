@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.employee_management.common.utils.FileUtil;
 import com.example.employee_management.common.utils.QueryPage;
 import com.example.employee_management.entity.EmAttachmentAndEmCorporateInformation;
 import com.example.employee_management.entity.EmCorporateInformation;
@@ -31,6 +30,25 @@ import java.util.Map;
 public class EmCorporateInformationServiceImpl implements EmCorporateInformationService {
     @Autowired
     EmCorporateInformationMapper mapper;
+
+    @Autowired
+    private EmCorporateInformationMapper emCorporateInformationMapper;
+
+    @Override
+    public Boolean saveEmCorporateInformation(EmCorporateInformation emCorporateInformation) {
+
+        return emCorporateInformationMapper.insert(emCorporateInformation) > 0;
+    }
+
+    @Override
+    public EmCorporateInformation getEmCorporateInformationById(Integer id) {
+        return emCorporateInformationMapper.selectById(id);
+    }
+
+    @Override
+    public Integer selectLast() {
+        return emCorporateInformationMapper.selectLast().getId();
+    }
 
     /**
      * 获取当前企业的运营状态
@@ -96,8 +114,7 @@ public class EmCorporateInformationServiceImpl implements EmCorporateInformation
     /**
      * 对EmCorporateInformationMapper进行接口注入
      */
-    @Autowired
-    EmCorporateInformationMapper emCorporateInformationMapper;
+
 
     /**
      * 对所有企业按照创建时间排序查询

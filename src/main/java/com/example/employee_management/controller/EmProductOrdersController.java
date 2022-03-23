@@ -1,13 +1,16 @@
 package com.example.employee_management.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.employee_management.common.utils.Result;
 import com.example.employee_management.entity.EmProductOrders;
-import com.example.employee_management.service.impl.EmProductOrdersServiceImpl;
+import com.example.employee_management.service.EmProductOrdersService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -20,8 +23,71 @@ import org.springframework.web.bind.annotation.*;
 public class EmProductOrdersController {
 
 
+
+
     @Autowired
-    EmProductOrdersServiceImpl emProductOrdersService;
+    private EmProductOrdersService emProductOrdersService;
+
+    /**
+     * 获取所有产品信息
+     * @return
+     */
+    @ApiOperation(" 李超===>获取所有产品信息")
+    @GetMapping("/get")
+    public Result getAllEmProductOrders()
+    {
+        List<EmProductOrders> allEmProductOrders = emProductOrdersService.getAllEmProductOrders();
+        if(!allEmProductOrders.isEmpty())
+        {
+            return Result.success(200,"查询成功",allEmProductOrders);
+        }
+        else
+        {
+            return Result.fail(400,"查询失败",null);
+        }
+    }
+
+    /**
+     * 通过ID查询产品信息
+     * @param id
+     * @return
+     */
+    @ApiOperation(" 李超===>通过ID查询产品信息")
+    @GetMapping("{id}")
+    public Result getProductById(@PathVariable("id") Integer id)
+    {
+        EmProductOrders product = emProductOrdersService.getProductById(id);
+        if(product != null)
+        {
+            return Result.success(200,"数据获取成功^_^",product);
+        }
+        else
+        {
+            return Result.fail(400,"数据获取失败-_-!",product);
+        }
+    }
+
+
+    /**
+     * 产品信息分页，多条件查询产品信息
+     * @param currentPage
+     * @param pageSize
+     * @param emProductOrders
+     * @return
+     */
+    @ApiOperation(" 李超===>产品信息分页和多条件查询产品信息")
+    @GetMapping("{currentPage}/{pageSize}")
+    public Result getPage(@PathVariable int currentPage,@PathVariable int pageSize, EmProductOrders emProductOrders)
+    {
+        IPage<EmProductOrders> page = emProductOrdersService.getPage(currentPage, pageSize);
+
+        //如果当前页码值大于总页码值，那么重写执行查询操作，使用最大页码值作为当前页码值
+        if(page.getPages() < currentPage)
+        {
+            page = emProductOrdersService.getPage((int)page.getPages(), pageSize);
+        }
+        return Result.success(200,"分页成功",page);
+    }
 
     /**
      *  修改开通状态
